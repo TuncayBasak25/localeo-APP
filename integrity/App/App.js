@@ -1,6 +1,8 @@
 import autoLogin from './functions/autoLogin';
 
 import BottomBar from './components/BottomBar';
+import TextInput from './components/TextInput';
+import Button from './components/Button';
 
 const App = {
   //Variables
@@ -49,7 +51,9 @@ const App = {
   autoLogin: autoLogin,
 
   //Components
-  BottomBar: BottomBar
+  BottomBar: BottomBar,
+  TextInput: TextInput,
+  Button: Button
 }
 
 export default App;

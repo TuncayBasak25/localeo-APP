@@ -1,8 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { Text, SafeAreaView, View, Button } from 'react-native';
-
-import Styles from '../../styleSheets/styles';
 
 import Api from 'localeo-api';
 import App from '../App';
@@ -11,9 +8,8 @@ import App from '../App';
 export default function BottomBar()
 {
   return (
-    <View style={Styles.bottomBar}>
+    <View style={{position: "absolute", bottom: 50, width: "80%", height: 60, backgroundColor: "red"}}>
 
-      <StatusBar style="auto" />
     </View>
   );
 }

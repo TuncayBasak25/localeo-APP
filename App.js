@@ -12,12 +12,10 @@ const Stack = createStackNavigator();
 
 export default function Starter()
 {
-  const [user, setUser] = useState(null);
-
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        { Object.entries(Screens).map( screen => (<Stack.Screen user name={screen[0]} key={screen[0]} component={screen[1]} />) ) }
+        { Object.entries(Screens).map( screen => (<Stack.Screen options={{headerShown: false}} name={screen[0]} key={screen[0]} component={screen[1]} />) ) }
       </Stack.Navigator>
     </NavigationContainer>
   );
