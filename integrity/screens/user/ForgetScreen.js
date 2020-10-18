@@ -8,12 +8,12 @@ import Api from 'localeo-api';
 import App from '../../App/App';
 
 
-export default function ProfileScreen({ navigation })
+export default function AccountScreen({ navigation })
 {
   return (
-    <App.MainContainer>
+    <SafeAreaView style={Styles.container}>
 
-
-    </App.MainContainer>
+      <StatusBar style="auto" />
+    </SafeAreaView>
   );
 }
