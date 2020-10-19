@@ -1,4 +1,4 @@
-import colors from './colors';
+import * as colors from './colors';
 let textColors = {};
 Object.entries(colors).map( ([name, color]) => textColors[name] = { color: color } );
 

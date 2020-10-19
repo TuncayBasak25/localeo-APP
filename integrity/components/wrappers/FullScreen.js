@@ -1,7 +1,7 @@
 import { View, StatusBar } from 'react-native';
 import React from 'react';
 
-import { fullScreen, bg } from '../../../styles/styles';
+import { fullScreen, bg } from '../../styles/styles';
 
 export function FullScreen(props)
 {

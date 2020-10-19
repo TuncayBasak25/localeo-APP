@@ -1,4 +1,4 @@
-import colors from './colors';
+import * as colors from './colors';
 
 let borderColors = {};
 let leftColors = {};

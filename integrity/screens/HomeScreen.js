@@ -4,9 +4,9 @@ import { Text, SafeAreaView, ScrollView, View, Button, TextInput } from 'react-n
 import Api from 'localeo-api';
 import App from '../App/App';
 
-import { fullScreen, bg } from '../styles/styles';
+import { fullScreen, lay, bg, inlineFormWrapper, inlineFormText, primaryButtonWrapper, primaryButtonText } from '../styles/styles';
 
-import { FullScreen } from '../App/components/components';
+import { FullScreen, WrappedButton, WrappedTextInput } from '../components/Components';
 
 export function HomeScreen({ navigation })
 {
@@ -18,9 +18,23 @@ export function HomeScreen({ navigation })
         </>:
         <Text>You are not connected</Text>
       }
-      <Button title="Login" onPress={ () => navigation.navigate("Login") } />
-      <Button title="Register" onPress={ () => navigation.navigate("Register") } />
-      <Button title="Message" onPress={ () => navigation.navigate("Message") } />
+      <WrappedButton wrapperStyle={inlineFormWrapper} title="Login" onPress={ () => navigation.navigate("Login") } />
+      <WrappedButton wrapperStyle={inlineFormWrapper} title="Register" onPress={ () => navigation.navigate("Register") } />
+      <WrappedButton wrapperStyle={inlineFormWrapper} title="Message" onPress={ () => navigation.navigate("Message") } />
+
+      <WrappedTextInput
+        wrapperStyle={inlineFormWrapper}
+        textStyle={inlineFormText}
+        placeholder="Test"
+      />
+
+      <WrappedButton
+        wrapperStyle={[primaryButtonWrapper]}
+        textStyle={primaryButtonText}
+        title="Messag"
+        onPress={ () => navigation.navigate("Message") }
+      />
+
     </FullScreen>
   );
 }
