@@ -12,12 +12,12 @@ Object.entries(colors).map( ([name, color]) => rightColors[name + "Right"] = { b
 Object.entries(colors).map( ([name, color]) => topColors[name + "Top"] = { borderTopColor: color } );
 Object.entries(colors).map( ([name, color]) => botColors[name + "Bot"] = { borderBottomColor: color } );
 
-export const w = val => {return {borderWidth: val}}
+const w = val => {return {borderWidth: val}}
 
-export const lw = val => {return {borderLeftWidth: val}}
-export const rw = val => {return {borderRightWidth: val}}
-export const tw = val => {return {borderTopWidth: val}}
-export const bw = val => {return {borderBottomWidth: val}}
+const lw = val => {return {borderLeftWidth: val}}
+const rw = val => {return {borderRightWidth: val}}
+const tw = val => {return {borderTopWidth: val}}
+const bw = val => {return {borderBottomWidth: val}}
 
 export const r = val => {return {borderRadius: val}}
 

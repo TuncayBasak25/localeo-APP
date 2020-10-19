@@ -5,10 +5,9 @@ import 'react-native-gesture-handler';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-//import Screens from './integrity/screens/Screens';
+import * as Screens from './integrity/screens/Screens';
 
-import {navbarHeight} from './integrity/styles/styles';
-console.log(navbarHeight);
+import {fullScreen} from './integrity/styles/styles';
 
 const Stack = createStackNavigator();
 
@@ -21,14 +20,12 @@ export default function Starter()
 {
 
   return (
-    <></>
+    <NavigationContainer>
+      <Stack.Navigator>
+        { Object.entries(Screens)
+          .map( ([name, comp]) => (<Stack.Screen options={{headerShown: false}} name={name} key={name} component={comp}
+        />) ) }
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-// <NavigationContainer>
-//   <Stack.Navigator>
-//     { Object.entries(Screens)
-//       .map( screen => (<Stack.Screen options={{headerShown: false}} name={screen[0]} key={screen[0]} component={screen[1]}
-//     />) ) }
-//   </Stack.Navigator>
-// </NavigationContainer>

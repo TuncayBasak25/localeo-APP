@@ -17,14 +17,14 @@ export const w7 = { fontWeight: "700" }
 export const w8 = { fontWeight: "800" }
 export const w9 = { fontWeight: "900" }
 
-export const height = val => {return {lineHeight: val}}
+export const lineHeight = val => {return {lineHeight: val}}
 export const family = val => {return {fontFamily: val}}
 
-export const auto = { textAlign: "auto" }
-export const left = { textAlign: "left" }
-export const right = { textAlign: "right" }
-export const center = { textAlign: "center" }
-export const justify = { textAlign: "justify" }
+const auto = { textAlign: "auto" }
+const left = { textAlign: "left" }
+const right = { textAlign: "right" }
+const center = { textAlign: "center" }
+const justify = { textAlign: "justify" }
 
 export const noDec = { textDecorationLine: "none" }
 export const underline = { textDecorationLine: "underline" }
@@ -39,7 +39,7 @@ export const text = {
 
   w1: w1, w2: w2, w3: w3, w4: w4, w5: w5, w6: w6, w7: w7, w8: w8, w9: w9,
 
-  height: height,
+  lineHeight: lineHeight,
   family: family,
 
   auto: auto,

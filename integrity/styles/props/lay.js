@@ -12,6 +12,8 @@ export const navbarHeight = screenHeight - windowHeight;
 export const w = val => {return {width: val}}
 export const h = val => {return {height: val}}
 
+export const ratio = val => {return {aspectRatio: val}}
+
 export const relW = val => {return {width: val + "%"}}
 export const relH = val => {return {height: val + "%"}}
 
@@ -75,6 +77,8 @@ export const lay = {
   minW: minW, minH: minH,
   maxW: maxW, maxH: maxH,
 
+  ratio: ratio,
+
   row: row, col: col,
 
   wrap: wrap, reverse: reverse, noWrap: noWrap,
@@ -84,13 +88,13 @@ export const lay = {
   jc: jc, ai: ai, ac: ac, as: as,
 
   ...pos,
-  screenWidth: Dimensions.get('screen').width,
-  screenHeight: Dimensions.get('screen').height,
-  windowWidth: Dimensions.get('window').width,
-  windowHeight: Dimensions.get('window').height,
+  screenWidth: screenWidth,
+  screenHeight: screenHeight,
+  windowWidth: windowWidth,
+  windowHeight: windowHeight,
 
-  statusBarHeight: StatusBar.height,
-  navbarHeight: screenHeight - windowHeight
+  statusBarHeight: statusBarHeight,
+  navbarHeight: navbarHeight
 }
 
 export default lay;
