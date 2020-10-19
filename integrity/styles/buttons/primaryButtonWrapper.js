@@ -16,6 +16,4 @@ export const primaryButtonWrapper = [
   bg.orange
 ]
 
-console.log(primaryButtonWrapper);
-
 export default primaryButtonWrapper;

@@ -6,7 +6,7 @@ import { fullScreen, bg } from '../../styles/styles';
 export function FullScreen(props)
 {
   return (
-    <View style={[fullScreen, bg.gray]} >
+    <View style={[fullScreen, bg.gray, props.style]} >
       { props.children }
       <StatusBar />
     </View>

@@ -1,7 +1,7 @@
 export * from './HomeScreen';
 
-// import LoginScreen from './user/LoginScreen';
-// import RegisterScreen from './user/RegisterScreen';
+export * from './user/LoginScreen';
+export * from './user/RegisterScreen';
 // import AccountScreen from './user/AccountScreen';
 // import ProfileScreen from './user/ProfileScreen';
 // import MessageScreen from './user/MessageScreen';

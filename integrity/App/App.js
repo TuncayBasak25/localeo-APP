@@ -1,11 +1,14 @@
 import autoLogin from './functions/autoLogin';
+import login from './functions/login';
+import register from './functions/register';
 
-const App = {
+export const App = {
   //Variables
 
   //User Variables
   user: null,
   logging: false,
+  registering: false,
 
   corresponder: {
     id: 2,
@@ -32,12 +35,12 @@ const App = {
 
   keyboardHeight: 0,
 
-  login: {
+  loginCreds: {
     username: null,
     password: null
   },
 
-  register: {
+  registerCreds: {
     username: null,
     email: null,
     password: null,
@@ -70,12 +73,8 @@ const App = {
 
   //Functions
   autoLogin: autoLogin,
+  login: login,
+  register: register
 }
 
 export default App;
-
-
-export {
-  App,
-  autoLogin
-};

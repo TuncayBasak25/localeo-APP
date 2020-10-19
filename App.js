@@ -14,8 +14,6 @@ const Stack = createStackNavigator();
 import App from './integrity/App/App';
 
 
-
-
 export default function Starter()
 {
 
@@ -23,7 +21,7 @@ export default function Starter()
     <NavigationContainer>
       <Stack.Navigator>
         { Object.entries(Screens)
-          .map( ([name, comp]) => (<Stack.Screen options={{headerShown: false}} name={name} key={name} component={comp}
+          .map( ([name, comp]) => (<Stack.Screen options={{headerShown: false}} name={name.slice(0, -6)} key={name} component={comp}
         />) ) }
       </Stack.Navigator>
     </NavigationContainer>

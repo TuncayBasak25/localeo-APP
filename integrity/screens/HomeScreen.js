@@ -8,8 +8,7 @@ import { fullScreen, lay, bg, inlineFormWrapper, inlineFormText, primaryButtonWr
 
 import { FullScreen, WrappedButton, WrappedTextInput } from '../components/Components';
 
-export function HomeScreen({ navigation })
-{
+export function HomeScreen({ navigation }) {
   return (
     <FullScreen>
       { App.logging && <Text>Logging</Text> }
