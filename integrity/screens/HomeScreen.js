@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, SafeAreaView, ScrollView, View, Button, TextInput } from 'react-native';
+import { Text, SafeAreaView, ScrollView, View, Button, TextInput, Keyboard } from 'react-native';
 
 import Api from 'localeo-api';
 import App from '../App/App';
@@ -28,9 +28,9 @@ export function HomeScreen({ navigation }) {
         </>:
         <Text>You are not connected</Text>
       }
-      <WrappedButton wrapperStyle={inlineFormWrapper} title="Login" onPress={ () => navigation.navigate("Login") } />
-      <WrappedButton wrapperStyle={inlineFormWrapper} title="Register" onPress={ () => navigation.navigate("Register") } />
-      <WrappedButton wrapperStyle={inlineFormWrapper} title="Message" onPress={ () => navigation.navigate("Message") } />
+      <WrappedButton style={inlineFormWrapper} title="Login" onPress={ () => navigation.navigate("Login") } />
+      <WrappedButton style={inlineFormWrapper} title="Register" onPress={ () => navigation.navigate("Register") } />
+      <WrappedButton style={inlineFormWrapper} title="Message" onPress={ () => navigation.navigate("Message") } />
 
       <WrappedTextInput
         wrapperStyle={inlineFormWrapper}

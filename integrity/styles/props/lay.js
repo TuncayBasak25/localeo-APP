@@ -9,8 +9,17 @@ export const windowHeight = Dimensions.get('window').height;
 export const statusBarHeight = StatusBar.currentHeight;
 export const navbarHeight = screenHeight - windowHeight;
 
+export const z = val => {return {zIndex: val}}
+
 export const w = val => {return {width: val}}
 export const h = val => {return {height: val}}
+
+export const rotate = angle => {return {transform: [{rotateZ: angle + "deg"}]}}
+export const rotateX = angle => {return {transform: [{rotateX: angle + "deg"}]}}
+export const rotateY = angle => {return {transform: [{rotateY: angle + "deg"}]}}
+export const translate = (x, y) => {return {transform: [{translateX: x}, {translateY: y}]}}
+export const translateX = val => {return {transform: [{translateX: val}]}}
+export const translateY = val => {return {transform: [{translateY: val}]}}
 
 export const ratio = val => {return {aspectRatio: val}}
 
@@ -37,6 +46,8 @@ export const bss = val => {return {flexBasis: val}}
 
 export const show = { display: "flex" }
 export const hide = { display: "none" }
+
+export const scroll = { overflow: "scroll" }
 
 export const jc = {
   start: { justifyContent: "flex-start" },
@@ -72,12 +83,16 @@ export const as = {
 }
 
 export const lay = {
-  w: w, h: h,
+  w: w, h: h, z: z,
   relW: relW, relH: relH,
   minW: minW, minH: minH,
   maxW: maxW, maxH: maxH,
 
+  scroll: scroll,
+
   ratio: ratio,
+
+  rotate: rotate, rotateX: rotateX, rotateY: rotateY, translate: translate, translateX: translateX, translateY: translateY,
 
   row: row, col: col,
 

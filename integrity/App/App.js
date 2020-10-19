@@ -17,18 +17,18 @@ export const App = {
   },
 
   messages: [
-    {text: "lorem ipsum dolar sit Ahmet est venu me payer.", posterId: 2, id: 1},
+    {text: "lorem ipsum dolar sit Ahmet est venu me payer.lorem ipsum dolar sit Ahmet est venu me payer.lorem ipsum dolar sit Ahmet est venu me payer.", posterId: 2, id: 1},
     {text: "Ok je vois.", posterId: 1, id: 2},
     {text: "lorem ipsum dolar sit Ahmet est venu me payer.", posterId: 2, id: 3},
-    {text: "Ok je vois.", posterId: 1, id: 4},
+    {text: "Ok je vois.lorem ipsum dolar sit Ahmet est venu me payer.lorem ipsum dolar sit Ahmet est venu me payer.lorem ipsum dolar sit Ahmet est venu me payer.", posterId: 1, id: 4},
     {text: "lorem ipsum dolar sit Ahmet est venu me payer.", posterId: 2, id: 5},
     {text: "Ok je vois.", posterId: 1, id: 6},
     {text: "lorem ipsum dolar sit Ahmet est venu me payer.", posterId: 2, id: 7},
     {text: "Ok je vois.", posterId: 1, id: 8},
-    {text: "lorem ipsum dolar sit Ahmet est venu me payer.", posterId: 2, id: 9},
+    {text: "lorem ipsum dolar sit Ahmet est venu me payer.lorem ipsum dolar sit Ahmet est venu me payer.", posterId: 2, id: 9},
     {text: "Ok je vois.", posterId: 1, id: 10},
     {text: "lorem ipsum dolar sit Ahmet est venu me payer.", posterId: 2, id: 11},
-    {text: "Ok je vois.", posterId: 1, id: 12},
+    {text: "Ok je vois.lorem ipsum dolar sit Ahmet est venu me payer.lorem ipsum dolar sit Ahmet est venu me payer.", posterId: 1, id: 12},
   ],
 
   myMessage: null,

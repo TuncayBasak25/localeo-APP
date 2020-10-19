@@ -3,10 +3,8 @@ import { View, TextInput } from 'react-native';
 
 export function WrappedTextInput(props)
 {
-  // let myProps = {...props};
-  // delete myProps.style;
   return (
-    <View style={[props.wrapperStyle]} >
+    <View style={[props.style]} >
       <TextInput
         {...props}
         style={props.textStyle}

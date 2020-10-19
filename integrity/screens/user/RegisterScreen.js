@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Text, ScrollView, Image, View, StatusBar, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Text, ScrollView, Image, View, StatusBar, TouchableOpacity, Keyboard } from 'react-native';
 
 import App from '../../App/App';
 
@@ -26,19 +26,21 @@ export function RegisterScreen({ navigation })
 
   const handleRegister = () => App.register().then( () => navigation.navigate("Login") ).catch(e => console.log(e));
 
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener( 'keyboardDidShow', () => setKeyboardVisible(true) );
+    const keyboardDidHideListener = Keyboard.addListener( 'keyboardDidHide', () => setKeyboardVisible(false) );
+    return () => { keyboardDidHideListener.remove(); keyboardDidShowListener.remove(); };
+   }, []);
+
   return (
-    <FullScreen style={[lay.jc.evenly]}>
-      <WrappedButton
-        wrapperStyle={closeButtonWrapper}
-        textStyle={[primaryButtonText, text.white]}
-        title="X"
-        onPress={navigation.goBack}
-      />
-      <Text style={[text.center, text.orange, text.size(40)]}>Créer un compte</Text>
+    <FullScreen style={[isKeyboardVisible ? lay.jc.around : lay.jc.evenly]}>
+      { !isKeyboardVisible && <Text style={[text.center, text.orange, text.size(40)]}>Créer un compte</Text> }
 
       <View>
         <WrappedTextInput
-          wrapperStyle={inlineFormWrapper}
+          style={inlineFormWrapper}
           textStyle={inlineFormText}
           value={username} placeholder="Entrez votre username"
           blurOnSubmit={true} autoCompleteType="password"
@@ -46,7 +48,7 @@ export function RegisterScreen({ navigation })
           onSubmitEditing={handleRegister}
         />
         <WrappedTextInput
-          wrapperStyle={inlineFormWrapper}
+          style={inlineFormWrapper}
           textStyle={inlineFormText}
           value={email} placeholder="Enrez votre email"
           blurOnSubmit={true} autoCompleteType="email"
@@ -54,7 +56,7 @@ export function RegisterScreen({ navigation })
           onSubmitEditing={handleRegister}
         />
         <WrappedTextInput
-          wrapperStyle={inlineFormWrapper}
+          style={inlineFormWrapper}
           textStyle={inlineFormText}
           value={password} placeholder="Mot de passe"  secureTextEntry={true}
           blurOnSubmit={true} autoCompleteType="password"
@@ -62,7 +64,7 @@ export function RegisterScreen({ navigation })
           onSubmitEditing={handleRegister}
         />
         <WrappedTextInput
-          wrapperStyle={inlineFormWrapper}
+          style={inlineFormWrapper}
           textStyle={inlineFormText}
           value={confirmPassword} placeholder="Confirmer votre mot de passe" secureTextEntry={true}
           blurOnSubmit={true} autoCompleteType="password"
@@ -73,13 +75,13 @@ export function RegisterScreen({ navigation })
 
       <View>
         <WrappedButton
-          wrapperStyle={[primaryButtonWrapper]}
+          style={[primaryButtonWrapper]}
           textStyle={primaryButtonText}
           title="-> CREATION DU COMPTE"
           onPress={handleRegister}
         />
         <WrappedButton
-          wrapperStyle={[primaryButtonWrapper, bg.primary, lay.w('auto')]}
+          style={[primaryButtonWrapper, bg.primary, lay.w('auto')]}
           textStyle={[primaryButtonText, text.white]}
           title="CONNEXION"
           onPress={ () => navigation.navigate("Login") }

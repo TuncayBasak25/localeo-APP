@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, ScrollView, Image, View, StatusBar, TouchableOpacity } from 'react-native';
+import { Text, ScrollView, Image, View, StatusBar, TouchableOpacity, Keyboard } from 'react-native';
 
 import App from '../../App/App';
 
@@ -14,7 +14,13 @@ import { FullScreen, WrappedButton, WrappedTextInput } from '../../components/Co
 
 export function LoginScreen({ navigation })
 {
-  useEffect(() => {} , [])
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener( 'keyboardDidShow', () => setKeyboardVisible(true) );
+    const keyboardDidHideListener = Keyboard.addListener( 'keyboardDidHide', () => setKeyboardVisible(false) );
+    return () => { keyboardDidHideListener.remove(); keyboardDidShowListener.remove(); };
+   }, []);
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -31,17 +37,11 @@ export function LoginScreen({ navigation })
 
   return (
     <FullScreen style={[lay.jc.evenly]}>
-      <WrappedButton
-        wrapperStyle={[closeButtonWrapper]}
-        textStyle={[primaryButtonText, text.white]}
-        title="X"
-        onPress={navigation.goBack}
-      />
-      <Text style={[text.center, text.orange, text.size(40)]}>Connexion</Text>
+      { !isKeyboardVisible && <Text style={[text.center, text.orange, text.size(40)]}>Connexion</Text> }
 
       <View>
         <WrappedTextInput
-          wrapperStyle={inlineFormWrapper}
+          style={inlineFormWrapper}
           textStyle={inlineFormText}
           value={username} placeholder="Username"
           blurOnSubmit={true} autoCompleteType="username"
@@ -49,7 +49,7 @@ export function LoginScreen({ navigation })
           onSubmitEditing={handleLogin}
         />
         <WrappedTextInput
-          wrapperStyle={inlineFormWrapper}
+          style={inlineFormWrapper}
           textStyle={inlineFormText}
           value={password} placeholder="Password" secureTextEntry={true}
           blurOnSubmit={true} autoCompleteType="password"
@@ -64,13 +64,13 @@ export function LoginScreen({ navigation })
 
       <View>
         <WrappedButton
-          wrapperStyle={[primaryButtonWrapper]}
+          style={[primaryButtonWrapper]}
           textStyle={primaryButtonText}
           title="-> SE CONNECTER"
           onPress={handleLogin}
         />
         <WrappedButton
-          wrapperStyle={[primaryButtonWrapper, bg.primary, lay.w('auto')]}
+          style={[primaryButtonWrapper, bg.primary, lay.w('auto')]}
           textStyle={[primaryButtonText, text.white]}
           title="Créez un compte"
           onPress={ () => navigation.navigate("Register") }

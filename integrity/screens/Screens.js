@@ -4,7 +4,7 @@ export * from './user/LoginScreen';
 export * from './user/RegisterScreen';
 // import AccountScreen from './user/AccountScreen';
 // import ProfileScreen from './user/ProfileScreen';
-// import MessageScreen from './user/MessageScreen';
+export * from './user/MessageScreen';
 //
 // import ArticleCategoryScreen from './article/ArticleCategoryScreen';
 // import ArticleDetailsScreen from './article/ArticleDetailsScreen';
