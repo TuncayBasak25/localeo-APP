@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, ScrollView, Image, View, StatusBar, TouchableOpacity } from 'react-native';
 
 import App from '../../App/App';
@@ -14,6 +14,8 @@ import { FullScreen, WrappedButton, WrappedTextInput } from '../../components/Co
 
 export function LoginScreen({ navigation })
 {
+  useEffect(() => {} , [])
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, SafeAreaView, ScrollView, View, Button, TextInput } from 'react-native';
 
 import Api from 'localeo-api';
@@ -9,6 +9,17 @@ import { fullScreen, lay, bg, inlineFormWrapper, inlineFormText, primaryButtonWr
 import { FullScreen, WrappedButton, WrappedTextInput } from '../components/Components';
 
 export function HomeScreen({ navigation }) {
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const focus = navigation.addListener('focus', () => {
+      if (App.user && user !== App.user) setUser(App.user);
+      if (!App.user && user !== null) setUser(null);
+    });
+    return focus;
+  }, [navigation]);
+
   return (
     <FullScreen>
       { App.logging && <Text>Logging</Text> }
