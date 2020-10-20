@@ -29,7 +29,6 @@ export function MessageScreen({ navigation })
     return () => { keyboardDidHideListener.remove(); keyboardDidShowListener.remove(); clearInterval(updater)};
    }, []);
 
-   console.log(App.messages);
 
   return (
     <FullScreen>
