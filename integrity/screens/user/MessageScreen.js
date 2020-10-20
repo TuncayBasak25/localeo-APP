@@ -15,21 +15,21 @@ import { FullScreen, WrappedButton, WrappedTextInput, Message } from '../../comp
 export function MessageScreen({ navigation })
 {
   const [keyboardHeight, setKeyboardHeight] = useState(false);
+  const [lastMessage, setlastMessage] = useState(null);
+  const [message, setMessage] = useState('');
+  const [lastUpdate, setLastUpdate] = useState((new Date).getTime());
+
+
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener( 'keyboardDidShow', e => setKeyboardHeight(e.endCoordinates.height) );
     const keyboardDidHideListener = Keyboard.addListener( 'keyboardDidHide', () => setKeyboardHeight(false) );
-    return () => { keyboardDidHideListener.remove(); keyboardDidShowListener.remove(); };
+    const updater = setInterval( () => App.updateMessages().then(() => {setLastUpdate((new Date).getTime()); console.log(lastUpdate);} ).catch(e => console.log(e)) , 3000)
+
+    return () => { keyboardDidHideListener.remove(); keyboardDidShowListener.remove(); clearInterval(updater)};
    }, []);
 
-  const [message, setMessage] = useState('');
-
-  const handleLogin = () => App.login()
-                            .then( error => {
-                              if (error) setError(error);
-                              else navigation.navigate("Home");
-                            })
-                            .catch(e => console.log(e));
+   console.log(App.messages);
 
   return (
     <FullScreen>
@@ -56,7 +56,7 @@ export function MessageScreen({ navigation })
           textStyle={[inlineFormText]}
           value={message} placeholder="Envoyer un message"
           onChangeText={setMessage}
-          onSubmitEditing={() => { App.messages.push({ posterId: 1, text: message, id: App.messages.length + 1 }); setMessage(''); }}
+          onSubmitEditing={() => { App.myMessage = message; App.sendMessage().then(() => {} ); setMessage(''); }}
         />
       </View>
     </FullScreen>

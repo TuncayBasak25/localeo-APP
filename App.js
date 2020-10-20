@@ -14,6 +14,7 @@ const Stack = createStackNavigator();
 import App from './integrity/App/App';
 
 
+
 export default function Starter()
 {
 

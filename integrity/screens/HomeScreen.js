@@ -31,6 +31,7 @@ export function HomeScreen({ navigation }) {
       <WrappedButton style={inlineFormWrapper} title="Login" onPress={ () => navigation.navigate("Login") } />
       <WrappedButton style={inlineFormWrapper} title="Register" onPress={ () => navigation.navigate("Register") } />
       <WrappedButton style={inlineFormWrapper} title="Message" onPress={ () => navigation.navigate("Message") } />
+      <WrappedButton style={inlineFormWrapper} title="Logout" onPress={ () => { App.logout().then(() => setUser(null)) }} />
 
       <WrappedTextInput
         wrapperStyle={inlineFormWrapper}
