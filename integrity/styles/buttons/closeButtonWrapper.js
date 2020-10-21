@@ -1,4 +1,4 @@
-import { lay, bg, border } from '../styles';
+import { lay, bg, border } from '../props/props';
 
 
 export const closeButtonWrapper = [

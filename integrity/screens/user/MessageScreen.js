@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, ScrollView, Image, View, StatusBar, TouchableOpacity, Keyboard } from 'react-native';
 
-import App from '../../App/App';
-
 import { fullScreen, lay, bg, mg, border, text, font,
   inlineFormWrapper, inlineFormText,
   primaryButtonWrapper, primaryButtonText,
@@ -12,21 +10,26 @@ import { fullScreen, lay, bg, mg, border, text, font,
 import { FullScreen, WrappedButton, WrappedTextInput, Message } from '../../components/Components';
 
 
-export function MessageScreen({ navigation })
+export function MessageScreen({ route, navigation })
 {
+  const { App } = route.params;
+  const [frame, nextFrame] = useState(0);
+
+
   const [keyboardHeight, setKeyboardHeight] = useState(false);
+
+  useEffect(App.keyBoardIsVisible(setKeyboardHeight), []);
+  useEffect(App.nextFrameOnFocus(nextFrame, navigation), []);
+
+
   const [lastMessage, setlastMessage] = useState(null);
   const [message, setMessage] = useState('');
-  const [lastUpdate, setLastUpdate] = useState((new Date).getTime());
-
-
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener( 'keyboardDidShow', e => setKeyboardHeight(e.endCoordinates.height) );
-    const keyboardDidHideListener = Keyboard.addListener( 'keyboardDidHide', () => setKeyboardHeight(false) );
-    const updater = setInterval( () => App.updateMessages().then(() => {setLastUpdate((new Date).getTime()); console.log(lastUpdate);} ).catch(e => console.log(e)) , 3000)
-
-    return () => { keyboardDidHideListener.remove(); keyboardDidShowListener.remove(); clearInterval(updater)};
+    if (App.isUpdatingMessage) return;
+    const messageUpdater = setInterval( () => App.updateMessages().then(res => { if (res && navigation.isFocused()) nextFrame(frame => frame+1) } ).catch(e => console.log(e)) , 100)
+    return () => { clearInterval(messageUpdater) };
    }, []);
 
 
@@ -46,7 +49,7 @@ export function MessageScreen({ navigation })
       </View>
 
       <ScrollView style={[lay.grw(1)]}>
-        {App.messages.map( message => ( <Message key={message.id} message={message} myId={App.user ? App.user.id : 1} /> ) )}
+        {App.messages.map( message => ( <Message key={String(Math.random() + String(Math.random()))} message={message} myId={App.user.id} /> ) )}
       </ScrollView>
 
       <View style={[lay.relH(15), lay.jc.center, keyboardHeight ? mg.b(keyboardHeight) : null ]}>
@@ -55,8 +58,12 @@ export function MessageScreen({ navigation })
           textStyle={[inlineFormText]}
           value={message} placeholder="Envoyer un message"
           onChangeText={setMessage}
-          onSubmitEditing={() => { App.myMessage = message; App.sendMessage().then(() => {} ); setMessage(''); }}
+          onSubmitEditing={() => { App.sendMessage(message).then(({ error }) => { if (error) setError(error); else setMessage(''); }) } }
         />
+        { error &&
+          <View>
+            <Text style={[text.center, text.secondary, text.size(15), lay.relW(60), lay.as.center]} >{error}</Text>
+          </View> }
       </View>
     </FullScreen>
   );

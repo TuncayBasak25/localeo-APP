@@ -1,4 +1,4 @@
-import { lay, mg, text } from '../styles';
+import { lay, mg, text } from '../props/props';
 
 
 export const primaryButtonText = [

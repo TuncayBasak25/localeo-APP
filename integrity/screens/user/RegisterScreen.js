@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, ScrollView, Image, View, StatusBar, TouchableOpacity, Keyboard } from 'react-native';
 
-import App from '../../App/App';
-
 import { fullScreen, lay, bg, border, text, font,
   inlineFormWrapper, inlineFormText,
   primaryButtonWrapper, primaryButtonText,
@@ -12,27 +10,22 @@ import { fullScreen, lay, bg, border, text, font,
 import { FullScreen, WrappedButton, WrappedTextInput } from '../../components/Components';
 
 
-export function RegisterScreen({ navigation })
+export function RegisterScreen({ route, navigation })
 {
+  const { App } = route.params;
+  const [frame, nextFrame] = useState(0);
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+
+  useEffect(App.keyBoardIsVisible(setKeyboardVisible), []);
+  useEffect(App.nextFrameOnFocus(nextFrame, navigation), []);
+
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState(null);
 
-  App.registerCreds.username = username;
-  App.registerCreds.email = password;
-  App.registerCreds.password = password;
-  App.registerCreds.confirmPassword = confirmPassword;
-
-  const handleRegister = () => App.register().then( () => navigation.navigate("Login") ).catch(e => console.log(e));
-
-  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
-
-  useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener( 'keyboardDidShow', () => setKeyboardVisible(true) );
-    const keyboardDidHideListener = Keyboard.addListener( 'keyboardDidHide', () => setKeyboardVisible(false) );
-    return () => { keyboardDidHideListener.remove(); keyboardDidShowListener.remove(); };
-   }, []);
+  const handleRegister = () => App.register(username, email, password, confirmPassword).then( res => { if (res.error) setError(res.error); else navigation.navigate("Login"); } ).catch(e => console.log(e));
 
   return (
     <FullScreen style={[isKeyboardVisible ? lay.jc.around : lay.jc.evenly]}>
@@ -71,6 +64,10 @@ export function RegisterScreen({ navigation })
           onChangeText={setConfirmPassword}
           onSubmitEditing={handleRegister}
         />
+        { error &&
+          <View>
+            <Text style={[text.center, text.secondary, text.size(15), lay.relW(60), lay.as.center]} >{error}</Text>
+          </View> }
       </View>
 
       <View>

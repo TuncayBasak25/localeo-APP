@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, ScrollView, Image, View, StatusBar, TouchableOpacity, Keyboard } from 'react-native';
 
-import App from '../../App/App';
-
 import { fullScreen, lay, bg, border, text, font,
   inlineFormWrapper, inlineFormText,
   primaryButtonWrapper, primaryButtonText,
@@ -12,28 +10,20 @@ import { fullScreen, lay, bg, border, text, font,
 import { FullScreen, WrappedButton, WrappedTextInput } from '../../components/Components';
 
 
-export function LoginScreen({ navigation })
+export function LoginScreen({ route, navigation })
 {
+  const { App } = route.params;
+  const [frame, nextFrame] = useState(0);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
 
-  useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener( 'keyboardDidShow', () => setKeyboardVisible(true) );
-    const keyboardDidHideListener = Keyboard.addListener( 'keyboardDidHide', () => setKeyboardVisible(false) );
-    return () => { keyboardDidHideListener.remove(); keyboardDidShowListener.remove(); };
-   }, []);
+  useEffect(App.keyBoardIsVisible(setKeyboardVisible), []);
+  useEffect(App.nextFrameOnFocus(nextFrame, navigation), []);
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
-  App.loginCreds.username = username;
-  App.loginCreds.password = password;
 
-  const handleLogin = () => App.login()
-                            .then( error => {
-                              if (error) setError(error);
-                              else navigation.navigate("Home");
-                            })
-                            .catch(e => console.log(e));
+  const handleLogin = () => App.login(username, password).then( res => { if (res.error) setError(res.error); else navigation.navigate("Home"); }).catch(e => console.log(e));
 
   return (
     <FullScreen style={[lay.jc.evenly]}>

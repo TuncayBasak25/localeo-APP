@@ -1,0 +1,47 @@
+{
+  "_from": "localeo-api",
+  "_id": "localeo-api@1.0.3",
+  "_inBundle": false,
+  "_integrity": "sha512-DnHBU4nmJP7cyVogNusDE8KK+lbuqadV0szJtp3drMe69tEWI++reYR0XmqxUdRyQKJyaOay+uS47B2vqshPpQ==",
+  "_location": "/localeo-api",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "localeo-api",
+    "name": "localeo-api",
+    "escapedName": "localeo-api",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/localeo-api/-/localeo-api-1.0.3.tgz",
+  "_shasum": "505c63d2e3968c7fccfb4bbabe60ef9fba55297e",
+  "_spec": "localeo-api",
+  "_where": "C:\\projects\\localeo\\Application",
+  "author": {
+    "name": "Tuncay Basak"
+  },
+  "bugs": {
+    "url": "https://github.com/TuncayBasak25/localeo-API/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Module of asynchronous function to interract with https://localeo.herokuapp.com API",
+  "homepage": "https://github.com/TuncayBasak25/localeo-API#readme",
+  "license": "ISC",
+  "main": "api.js",
+  "name": "localeo-api",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TuncayBasak25/localeo-API.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.3"
+}

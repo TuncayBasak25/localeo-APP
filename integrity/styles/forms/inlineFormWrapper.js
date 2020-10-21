@@ -1,4 +1,4 @@
-import { lay, mg, bg, border } from '../styles';
+import { lay, mg, bg, border } from '../props/props';
 
 
 export const inlineFormWrapper = [

@@ -1,4 +1,4 @@
-import { lay} from '../styles';
+import { lay } from '../props/props';
 
 
 export const fullScreen = [
