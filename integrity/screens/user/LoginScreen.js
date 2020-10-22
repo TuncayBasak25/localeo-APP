@@ -4,10 +4,13 @@ import { Text, ScrollView, Image, View, StatusBar, TouchableOpacity, Keyboard } 
 import { fullScreen, lay, bg, border, text, font,
   inlineFormWrapper, inlineFormText,
   primaryButtonWrapper, primaryButtonText,
-  closeButtonWrapper
+  closeButtonWrapper,
+  mg
 } from '../../styles/styles';
 
 import { FullScreen, WrappedButton, WrappedTextInput } from '../../components/Components';
+
+import { AntDesign } from '@expo/vector-icons';
 
 
 export function LoginScreen({ route, navigation })
@@ -33,7 +36,7 @@ export function LoginScreen({ route, navigation })
         <WrappedTextInput
           style={inlineFormWrapper}
           textStyle={inlineFormText}
-          value={username} placeholder="Username"
+          value={username} placeholder="Pseudo"
           blurOnSubmit={true} autoCompleteType="username"
           onChangeText={setUsername}
           onSubmitEditing={handleLogin}
@@ -41,7 +44,7 @@ export function LoginScreen({ route, navigation })
         <WrappedTextInput
           style={inlineFormWrapper}
           textStyle={inlineFormText}
-          value={password} placeholder="Password" secureTextEntry={true}
+          value={password} placeholder="Mot de passe" secureTextEntry={true}
           blurOnSubmit={true} autoCompleteType="password"
           onChangeText={setPassword}
           onSubmitEditing={handleLogin}
@@ -55,10 +58,14 @@ export function LoginScreen({ route, navigation })
       <View>
         <WrappedButton
           style={[primaryButtonWrapper]}
-          textStyle={primaryButtonText}
-          title="-> SE CONNECTER"
+          subStyle={[lay.row, lay.jc.center, lay.ai.center]}
           onPress={handleLogin}
-        />
+        >
+        <AntDesign style={mg.h(30)} name="login" size={30} color="black" />
+        <Text style={[lay.grw(1), text.size(20)]}>
+          Se connecter
+        </Text>
+        </WrappedButton>
         <WrappedButton
           style={[primaryButtonWrapper, bg.primary, lay.w('auto')]}
           textStyle={[primaryButtonText, text.white]}

@@ -19,7 +19,7 @@ export function AccountScreen({ route, navigation })
   return (
     <FullScreen>
     
-      <Text>
+      <Text style={[mg.t(20), mg.l(20), text.size(22), text.secondary]}>
         Vos informations
       </Text>
 

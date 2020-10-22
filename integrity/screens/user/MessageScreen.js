@@ -40,7 +40,7 @@ export function MessageScreen({ route, navigation })
     <FullScreen>
       <View style={[lay.relH(15), lay.jc.center, lay.ai.center, border.r(40), bg.primary]}>
         <WrappedButton
-          style={[lay.abs, lay.as.start, lay.left(20), lay.relH(50), lay.ratio(1),  border.r(50), bg.white]}
+          style={[lay.abs, lay.as.start, lay.left(20), lay.relH(50), lay.ratio(1), border.r(50), bg.white]}
           subStyle={lay.jc.center}
           textStyle={[text.size(50), text.gray]}
           onPress={navigation.goBack}
