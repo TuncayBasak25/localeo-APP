@@ -1,10 +1,11 @@
 import Api from 'localeo-api';
+import User from './User';
 
-
-export class Message
+export class Message extends User
 {
   constructor()
   {
+    super();
     this.corresponder = null;
     this.messages = [];
   }

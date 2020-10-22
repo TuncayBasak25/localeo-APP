@@ -9,6 +9,11 @@ export class App extends Session
     super();
   }
 
+  uuid()
+  {
+    return String(Math.random() + String(Math.random()));
+  }
+
   keyBoardIsVisible(setter)
   {
     return () => {

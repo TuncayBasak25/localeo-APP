@@ -1,7 +1,7 @@
-import User from './User';
+import Article from './Article';
 import Api from 'localeo-api';
 
-export class Session extends User
+export class Session extends Article
 {
   constructor()
   {

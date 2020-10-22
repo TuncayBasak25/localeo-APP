@@ -1,12 +1,26 @@
-import Message from './Message';
+
 import Api from 'localeo-api';
 
-export class User extends Message
+export class User
 {
   constructor()
   {
-    super();
+    this.users = {};
   }
+
+  async getUser(userId)
+  {
+    if (this.users["user" + userId]) return { user: this.users["user" + user.id] };
+    const { user, error } = await Api.getUser(userId);
+
+    if (error) return { error: error };
+
+    if (user) this.users["user" + user.id] = user;
+    else return { error: "unknown get user error" }
+
+    return { user: this.users["user" + user.id] };
+  }
+
 
 }
 

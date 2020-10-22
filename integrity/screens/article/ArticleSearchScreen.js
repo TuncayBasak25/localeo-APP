@@ -1,19 +1,55 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
-import { Text, SafeAreaView, View, Button } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Text, ScrollView, Image, View } from 'react-native';
 
-import Styles from '../../styleSheets/styles';
+import { fullScreen, lay, bg, mg, border, text, font,
+  inlineFormWrapper, inlineFormText,
+  primaryButtonWrapper, primaryButtonText,
+  closeButtonWrapper
+} from '../../styles/styles';
 
-import Api from 'localeo-api';
-import App from '../../App/App';
+import { FullScreen, WrappedButton, WrappedTextInput, ArticleImage, ArticleUser } from '../../components/Components';
 
 
-export default function ArticleSearchScreen({ navigation })
+export function ArticleSearchScreen({ route, navigation })
 {
-  return (
-    <SafeAreaView style={Styles.container}>
+  const { App } = route.params;
+  const [frame, setFrame] = useState(0);
+  const nextFrame = () => setFrame(frame => frame+1);
 
-      <StatusBar style="auto" />
-    </SafeAreaView>
+
+  const [keyboardHeight, setKeyboardHeight] = useState(false);
+
+  useEffect(App.keyBoardIsVisible(setKeyboardHeight), []);
+  useEffect(App.nextFrameOnFocus(setFrame, navigation), []);
+
+
+  const [lastMessage, setlastMessage] = useState(null);
+  const [image, setImage] = useState({ uri: null });
+  const [error, setError] = useState(false);
+
+  const [words, setWords] = useState('');
+
+  return (
+    <FullScreen>
+      <WrappedTextInput
+        style={[inlineFormWrapper, bg.primary]}
+        textStyle={[inlineFormText]}
+        value={words} placeholder="Recherche"
+        onChangeText={setWords}
+        onSubmitEditing={() => { if (!App.searching) App.searchArticle(words).then(nextFrame).catch(e => console.log(e)); } }
+      />
+      <ScrollView style={[lay.grw(1)]} >
+        <View style={[lay.row, lay.wrap, lay.jc.center]} >
+          { App.articles.map( article => (
+            <View key={App.uuid()} style={[lay.relW(40), bg.dark, mg.m(10)]} >
+              <ArticleImage image={"image" + article.id} App={App} />
+              <ArticleUser userId={article.UserId} style={[lay.relW(100)]} App={App} />
+            </View>
+          )) }
+        </View>
+      </ScrollView>
+    </FullScreen>
   );
 }
+
+export default ArticleSearchScreen;

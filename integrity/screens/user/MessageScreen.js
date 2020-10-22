@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, ScrollView, Image, View, StatusBar, TouchableOpacity, Keyboard } from 'react-native';
+import { Text, ScrollView, Image, View } from 'react-native';
 
 import { fullScreen, lay, bg, mg, border, text, font,
   inlineFormWrapper, inlineFormText,
@@ -54,7 +54,7 @@ export function MessageScreen({ route, navigation })
       </View>
 
       <ScrollView style={[lay.grw(1)]}>
-        {App.messages.map( message => ( <Message key={String(Math.random() + String(Math.random()))} message={message} myId={App.user.id} cpdId={App.corresponder.id} /> ) )}
+        {App.messages.map( message => ( <Message key={App.uuid()} message={message} myId={App.user.id} cpdId={App.corresponder.id} /> ) )}
       </ScrollView>
 
       <View style={[lay.relH(15), lay.jc.center, keyboardHeight ? mg.b(keyboardHeight) : null ]}>
