@@ -43,13 +43,18 @@ export function MessageScreen({ route, navigation })
           onPress={navigation.goBack}
         />
         <WrappedButton style={[lay.relH(80), lay.jc.center, lay.ai.center]} onPress={() => console.log('test')}>
-          <Image source={App.corresponder.avatar} style={[lay.relH(60), lay.ratio(1), lay.as.center, border.r(100)]} />
+          { App.corresponder.Avatar &&
+            <Image
+              source={{ uri: "data:images/jpeg;base64," + App.corresponder.Avatar.data }}
+              style={[lay.relH(60), lay.ratio(1), lay.as.center, border.r(100)]}
+            />
+          }
           <Text style={[text.secondary, text.center, text.size(30)]}>{App.corresponder.username}</Text>
         </WrappedButton>
       </View>
 
       <ScrollView style={[lay.grw(1)]}>
-        {App.messages.map( message => ( <Message key={String(Math.random() + String(Math.random()))} message={message} myId={App.user.id} /> ) )}
+        {App.messages.map( message => ( <Message key={String(Math.random() + String(Math.random()))} message={message} myId={App.user.id} cpdId={App.corresponder.id} /> ) )}
       </ScrollView>
 
       <View style={[lay.relH(15), lay.jc.center, keyboardHeight ? mg.b(keyboardHeight) : null ]}>

@@ -34,6 +34,8 @@ export class Session extends User
     const { error } = await Api.logout();
     if (error) return { error: error };
     this.user = null;
+    this.corresponder = null;
+    this.messages = [];
     return {};
   }
 }

@@ -5,8 +5,10 @@ import * as S from '../../styles/styles';
 
 export function Message(props)
 {
-  const { myId } = props;
-  const { text, posterId } = props.message;
+  const { myId, cpdId } = props;
+  const { text, posterId, destinaterId } = props.message;
+
+  if (posterId !== cpdId && destinaterId !== cpdId) return (<></>);
 
   const myBg = (posterId == myId) ? S.bg.dark : S.bg.orange;
   const myColor = (posterId == myId) ? S.text.white : S.text.dark;

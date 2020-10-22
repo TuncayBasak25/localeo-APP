@@ -37,7 +37,7 @@ export class Message
     this.messages = this.messages.concat(newMessages);
 
     let a = this.messages.map( v => JSON.stringify(v) );
-    a = [...new Set(a)];console.log(a);throw new Error();
+    a = [...new Set(a)];
     this.messages = a.map( v => JSON.parse(v) );
 
     this.isUpdatingMessage = false;
