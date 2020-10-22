@@ -38,6 +38,21 @@ export class Article extends Message
     this.searching = false;
   }
 
+  getTimeDiff(createdAt)
+  {
+    let base = ((new Date).getTime() - (Date.parse(createdAt))) / 1000;
+    let time = Math.ceil(base);
+    let text = `Posté il y a ${time} seconds`;
+    if (time > 59) { time = Math.round(base / 60); text = `Posté il y a ${time} minute` }
+    if (time > 59) { time = Math.round(base / 3600); text = `Posté il y a ${time} heure` }
+    if (time > 23) { time = Math.round(base / 3600 / 24); text = `Posté il y a ${time} jour` }
+    if (time > 7 ) { time = Math.round(base / 3600 /24 / 7); text = `Posté il y a ${time} semaine` }
+    if (time > 4 ) { time = Math.round(base / 3600 /24 / 30); text = `Posté il y a ${time} mois` }
+    if (time > 11) { time = Math.round(base / 3600 /24 / 30 / 12); text = `Posté il y a ${time} an` }
+
+    return text;
+  }
+
 }
 
 export default Article;

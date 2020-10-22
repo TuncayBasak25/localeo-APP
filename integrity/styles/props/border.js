@@ -21,6 +21,11 @@ const bw = val => {return {borderBottomWidth: val}}
 
 export const r = val => {return {borderRadius: val}}
 
+export const lr = val => {return {borderTopLeftRadius: val, borderBottomLeftRadius: val}}
+export const rr = val => {return {borderTopRightRadius: val, borderBottomRightRadius: val}}
+export const tr = val => {return {borderTopRigthRadius: val, borderTopLeftRadius: val}}
+export const br = val => {return {borderBottomRightRadius: val, borderBottomLeftRadius: val}}
+
 export const tlr = val => {return {borderTopLeftRadius: val}}
 export const trr = val => {return {borderTopRightRadius: val}}
 export const blr = val => {return {borderBottomLeftRadius: val}}
@@ -28,7 +33,7 @@ export const brr = val => {return {borderBottomRightRadius: val}}
 
 export const border = {
   w: w, lw: lw, rw: rw, tw: tw, bw: bw,
-  r: r, tlr: tlr, trr: trr, blr: blr, brr: brr,
+  r: r, lr: lr, rr: rr, tr: tr, br: br, tlr: tlr, trr: trr, blr: blr, brr: brr,
   ...borderColors,
   ...leftColors,
   ...rightColors,

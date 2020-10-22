@@ -11,7 +11,9 @@ export function ArticleImage(props)
   if (!App.images[image]) setTimeout(() => nextFrame(frame => frame+1), 500);
 
   return (
-    <Image style={[S.lay.relW(50), S.lay.ratio(1), S.lay.as.center]} source={App.images[image]} />
+    <View style={[S.relW(100), S.ratio(1), S.jc.center, S.ai.center, props.style]} >
+      <Image style={[S.lay.relW(100), S.lay.ratio(1), S.border.r(20), props.imageStyle]} source={App.images[image]} />
+    </View>
   );
 }
 

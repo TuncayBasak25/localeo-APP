@@ -3,7 +3,7 @@ export * from './HomeScreen';
 export * from './user/LoginScreen';
 export * from './user/RegisterScreen';
 // import AccountScreen from './user/AccountScreen';
-// import ProfileScreen from './user/ProfileScreen';
+export * from './user/ProfileScreen';
 export * from './user/MessageScreen';
 //
 // import ArticleCategoryScreen from './article/ArticleCategoryScreen';

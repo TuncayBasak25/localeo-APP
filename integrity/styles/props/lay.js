@@ -17,6 +17,14 @@ export const h = val => {return {height: val}}
 export const rotate = angle => {return {transform: [{rotateZ: angle + "deg"}]}}
 export const rotateX = angle => {return {transform: [{rotateX: angle + "deg"}]}}
 export const rotateY = angle => {return {transform: [{rotateY: angle + "deg"}]}}
+
+export const flipX = {transform: [{scaleX: -1}]}
+export const flipY = {transform: [{scaleY: -1}]}
+
+export const scale = (x, y) => {return {transform: [{scaleX: x}, {scaleY: y}]}}
+export const scaleX = val => {return {transform: [{scaleX: val}]}}
+export const scaleY = val => {return {transform: [{scaleY: val}]}}
+
 export const translate = (x, y) => {return {transform: [{translateX: x}, {translateY: y}]}}
 export const translateX = val => {return {transform: [{translateX: val}]}}
 export const translateY = val => {return {transform: [{translateY: val}]}}
@@ -91,6 +99,8 @@ export const lay = {
   scroll: scroll,
 
   ratio: ratio,
+
+  flipX: flipX, flipY: flipY, scale: scale, scaleX: scaleX, scaleY: scaleY,
 
   rotate: rotate, rotateX: rotateX, rotateY: rotateY, translate: translate, translateX: translateX, translateY: translateY,
 

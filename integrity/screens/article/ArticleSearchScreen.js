@@ -7,7 +7,7 @@ import { fullScreen, lay, bg, mg, border, text, font,
   closeButtonWrapper
 } from '../../styles/styles';
 
-import { FullScreen, WrappedButton, WrappedTextInput, ArticleImage, ArticleUser } from '../../components/Components';
+import { FullScreen, WrappedButton, WrappedTextInput, ArticleImage, ArticleInfo } from '../../components/Components';
 
 
 export function ArticleSearchScreen({ route, navigation })
@@ -16,6 +16,7 @@ export function ArticleSearchScreen({ route, navigation })
   const [frame, setFrame] = useState(0);
   const nextFrame = () => setFrame(frame => frame+1);
 
+  const handleSearch = () => { if (!App.searching) App.searchArticle(words).then(nextFrame).catch(e => console.log(e)); }
 
   const [keyboardHeight, setKeyboardHeight] = useState(false);
 
@@ -29,6 +30,8 @@ export function ArticleSearchScreen({ route, navigation })
 
   const [words, setWords] = useState('');
 
+  if (frame === 0) handleSearch();
+
   return (
     <FullScreen>
       <WrappedTextInput
@@ -36,14 +39,14 @@ export function ArticleSearchScreen({ route, navigation })
         textStyle={[inlineFormText]}
         value={words} placeholder="Recherche"
         onChangeText={setWords}
-        onSubmitEditing={() => { if (!App.searching) App.searchArticle(words).then(nextFrame).catch(e => console.log(e)); } }
+        onSubmitEditing={handleSearch}
       />
       <ScrollView style={[lay.grw(1)]} >
         <View style={[lay.row, lay.wrap, lay.jc.center]} >
           { App.articles.map( article => (
-            <View key={App.uuid()} style={[lay.relW(40), bg.dark, mg.m(10)]} >
+            <View key={App.uuid()} style={[lay.relW(90), bg.dark, mg.m(10), border.r(20)]} >
               <ArticleImage image={"image" + article.id} App={App} />
-              <ArticleUser userId={article.UserId} style={[lay.relW(100)]} App={App} />
+              <ArticleInfo article={article} App={App} />
             </View>
           )) }
         </View>

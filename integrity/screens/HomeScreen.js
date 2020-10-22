@@ -27,6 +27,7 @@ export function HomeScreen({ route, navigation })
         { App.logging && <Text>Logging</Text> }
         { App.user ? <>
           <Text>Hi {App.user.username}</Text>
+          <WrappedButton style={inlineFormWrapper} title="Profil" onPress={ () => navigation.navigate("Profile") } />
           </>:
           <Text>You are not connected</Text>
         }
