@@ -6,6 +6,11 @@ export function getArticle(articleId)
   return fetchApi(`article/read?articleId=${articleId}`);
 }
 
+export function getCategories()
+{
+  return fetchApi(`article/read/getCategories`);
+}
+
 export function getArticleOf(sellerId, page = 1, max = 20)
 {
   return fetchApi(`article/read/getArticleOf?sellerId=${sellerId}&page=${page}&max=${max}`);
@@ -23,6 +28,7 @@ export function searchArticle(searchBody, page = 1, max = 20)
 
 const readArticle = {
   getArticle: getArticle,
+  getCategories: getCategories,
   getArticleOf: getArticleOf,
   searchArticle: searchArticle
 }

@@ -1,8 +1,8 @@
 {
   "_from": "localeo-api",
-  "_id": "localeo-api@1.0.3",
+  "_id": "localeo-api@1.0.5",
   "_inBundle": false,
-  "_integrity": "sha512-DnHBU4nmJP7cyVogNusDE8KK+lbuqadV0szJtp3drMe69tEWI++reYR0XmqxUdRyQKJyaOay+uS47B2vqshPpQ==",
+  "_integrity": "sha512-nyu5eF144SgGHTA9z/Siy3cQkRPR0nwc2xHtmqHCqf50XU8W9QJ8TU+pAX9fMdn3gnQTsgqdIwfL3KfgMam5Hg==",
   "_location": "/localeo-api",
   "_phantomChildren": {},
   "_requested": {
@@ -19,8 +19,8 @@
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/localeo-api/-/localeo-api-1.0.3.tgz",
-  "_shasum": "505c63d2e3968c7fccfb4bbabe60ef9fba55297e",
+  "_resolved": "https://registry.npmjs.org/localeo-api/-/localeo-api-1.0.5.tgz",
+  "_shasum": "1d1c6d67d0a9fd2b62c22689b62c5f9f4211d8a2",
   "_spec": "localeo-api",
   "_where": "C:\\projects\\localeo\\Application",
   "author": {
@@ -43,5 +43,5 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "1.0.3"
+  "version": "1.0.5"
 }

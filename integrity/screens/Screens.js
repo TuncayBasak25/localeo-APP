@@ -10,4 +10,4 @@ export * from './user/MessageScreen';
 // import ArticleDetailsScreen from './article/ArticleDetailsScreen';
 // import ArticleHomeScreen from './article/ArticleHomeScreen';
 export * from './article/ArticleSearchScreen';
-// import ArticlePostScreen from './article/ArticlePostScreen';
+export * from './article/ArticlePostScreen';

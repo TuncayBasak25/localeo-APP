@@ -16,7 +16,7 @@ import updateMessage from './message/updateMessage';
 
 import createArticle from './article/createArticle';
 import deleteArticle from './article/deleteArticle';
-import readArticle, { getArticle, getArticleOf, searchArticle } from './article/readArticle';
+import readArticle, { getArticle, getCategories, getArticleOf, searchArticle } from './article/readArticle';
 import updateArticle from './article/updateArticle';
 
 import createImage from './article/image/createImage';
@@ -52,6 +52,7 @@ const Api = {
   readArticle: readArticle,
   updateArticle: updateArticle,
   getArticle: getArticle,
+  getCategories: getCategories,
   getArticleOf: getArticleOf,
   searchArticle: searchArticle,
 

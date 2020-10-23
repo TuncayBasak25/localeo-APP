@@ -10,12 +10,15 @@ const Stack = createStackNavigator();
 
 import App from './integrity/App/App';
 
+
+
 export default class AppStarter extends React.Component
 {
   constructor()
   {
     super();
     this.App = new App;
+    this.App.getCategories();
   }
 
   render() {

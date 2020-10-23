@@ -18,63 +18,63 @@ export function ProfileScreen({ route, navigation })
 
   return (
     <FullScreen>
-    <View style={[lay.relW(100), lay.relH(20), bg.primary, border.blr(30), border.brr(30), lay.jc.center, lay.ai.center]}>
-      <Text style={[text.size(30), text.secondary]}>
-        Paramètre
-      </Text>
-    </View>
-
-    <View style={[lay.jc.between, lay.grw(1)]}>
-
-      <View>
-      <WrappedButton
-          style={[superstyle, mg.t(30)]}
-          subStyle={substyle}
-          onPress={ () => navigation.navigate("Account") }
-        >
-          <SimpleLineIcons style={mg.h(20)} name="user" size={24} color={bg.orange.backgroundColor} />
-          <Text style={[lay.grw(1), text.secondary, text.size(20)]}>
-            Votre compte
-          </Text>
-          <Octicons style={mg.h(20)} name="chevron-right" size={24} color={bg.secondary.backgroundColor} />
-        </WrappedButton>
-
-        <WrappedButton
-          style={superstyle}
-          subStyle={substyle} onPress={ () => {} }
-        >
-          <Ionicons style={mg.h(20)} name="md-menu" size={24} color={bg.orange.backgroundColor} />
-          <Text style={[lay.grw(1), text.secondary, text.size(20)]}>
-            Vos annonces
-          </Text>
-          <Octicons style={mg.h(20)} name="chevron-right" size={24} color={bg.secondary.backgroundColor} />
-        </WrappedButton>
-
-        <WrappedButton
-          style={superstyle}
-          subStyle={substyle}
-          onPress={ () => navigation.navigate("Message") }
-        >
-          <MaterialIcons style={mg.h(20)} name="message" size={24} color={bg.orange.backgroundColor} />
-          <Text style={[lay.grw(1), text.secondary, text.size(20)]}>
-            Vos messages
-          </Text>
-          <Octicons style={mg.h(20)} name="chevron-right" size={24} color={bg.secondary.backgroundColor} />
-        </WrappedButton>
+      <View style={[lay.relW(100), lay.relH(20), bg.primary, border.blr(30), border.brr(30), lay.jc.center, lay.ai.center]}>
+        <Text style={[text.size(30), text.secondary]}>
+          Paramètre
+        </Text>
       </View>
 
+      <View style={[lay.jc.between, lay.grw(1)]}>
+
+        <View>
         <WrappedButton
-          style={[superstyle, mg.b(30)]}
-          subStyle={substyle}
-          onPress={ () => App.logout().then(() => navigation.navigate("Home") ).catch(e => console.log(e)) }
-        >
-          <Entypo style={mg.h(20)} name="circle-with-cross" size={24} color={bg.orange.backgroundColor} />
-          <Text style={[lay.grw(1), text.secondary, text.size(20)]}>
-            Déconnexion
-          </Text>
-          <Octicons style={mg.h(20)} name="chevron-right" size={24} color={bg.secondary.backgroundColor} />
-        </WrappedButton>
-    </View>
+            style={[superstyle, mg.t(30)]}
+            subStyle={substyle}
+            onPress={ () => navigation.navigate("Account") }
+          >
+            <SimpleLineIcons style={mg.h(20)} name="user" size={24} color={bg.orange.backgroundColor} />
+            <Text style={[lay.grw(1), text.secondary, text.size(20)]}>
+              Votre compte
+            </Text>
+            <Octicons style={mg.h(20)} name="chevron-right" size={24} color={bg.secondary.backgroundColor} />
+          </WrappedButton>
+
+          <WrappedButton
+            style={superstyle}
+            subStyle={substyle} onPress={ () => {} }
+          >
+            <Ionicons style={mg.h(20)} name="md-menu" size={24} color={bg.orange.backgroundColor} />
+            <Text style={[lay.grw(1), text.secondary, text.size(20)]}>
+              Vos annonces
+            </Text>
+            <Octicons style={mg.h(20)} name="chevron-right" size={24} color={bg.secondary.backgroundColor} />
+          </WrappedButton>
+
+          <WrappedButton
+            style={superstyle}
+            subStyle={substyle}
+            onPress={ () => navigation.navigate("Message") }
+          >
+            <MaterialIcons style={mg.h(20)} name="message" size={24} color={bg.orange.backgroundColor} />
+            <Text style={[lay.grw(1), text.secondary, text.size(20)]}>
+              Vos messages
+            </Text>
+            <Octicons style={mg.h(20)} name="chevron-right" size={24} color={bg.secondary.backgroundColor} />
+          </WrappedButton>
+        </View>
+
+          <WrappedButton
+            style={[superstyle, mg.b(30)]}
+            subStyle={substyle}
+            onPress={ () => App.logout().then(() => navigation.navigate("Home") ).catch(e => console.log(e)) }
+          >
+            <Entypo style={mg.h(20)} name="circle-with-cross" size={24} color={bg.orange.backgroundColor} />
+            <Text style={[lay.grw(1), text.secondary, text.size(20)]}>
+              Déconnexion
+            </Text>
+            <Octicons style={mg.h(20)} name="chevron-right" size={24} color={bg.secondary.backgroundColor} />
+          </WrappedButton>
+      </View>
 
     </FullScreen>
   );

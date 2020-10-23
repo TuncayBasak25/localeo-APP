@@ -32,15 +32,41 @@ export function ArticleSearchScreen({ route, navigation })
 
   if (frame === 0) handleSearch();
 
+  if (!App.categories) App.getCategories().then( () => nextFrame() ).catch(e => console.log(e));
+
   return (
     <FullScreen>
-      <WrappedTextInput
-        style={[inlineFormWrapper, bg.primary]}
-        textStyle={[inlineFormText]}
-        value={words} placeholder="Recherche"
-        onChangeText={setWords}
-        onSubmitEditing={handleSearch}
-      />
+      <View style={[bg.primary, border.br(20)]} >
+        <WrappedTextInput
+          style={[inlineFormWrapper, bg.secondary]}
+          textStyle={[inlineFormText]}
+          value={words} placeholder="Recherche"
+          onChangeText={setWords}
+          onSubmitEditing={handleSearch}
+        />
+        <View style={[lay.relW(100), mg.b(10)]}>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
+            <WrappedButton
+              title="Tout"
+              style={[lay.h(50), mg.l(20), border.r(50), (App.category === 'tout') ? bg.orange : bg.primary]}
+              textStyle={[text.size(30), text.bold, mg.h(20), (App.category === 'tout') ? text.dark : text.white]}
+              onPress={(App.category === 'tout') ? () => {} : () => { App.category = 'tout'; nextFrame() } }
+            />
+            { App.categories &&
+              App.categories.map( category => (
+                <WrappedButton
+                  title={category.name.charAt(0).toUpperCase() + category.name.slice(1)}
+                  style={[lay.h(50), border.r(50), (App.category === category.name) ? bg.orange : bg.primary]}
+                  textStyle={[text.size(30), text.bold, mg.h(20), (App.category === category.name) ? text.dark : text.white]}
+                  onPress={(App.category === category.name) ? () => {} : () => { App.category = category.name; nextFrame() } }
+                  key={App.uuid()}
+                />
+              ))
+            }
+          </ScrollView>
+        </View>
+      </View>
+
       <ScrollView style={[lay.grw(1)]} >
         <View style={[lay.row, lay.wrap, lay.jc.center]} >
           { App.articles.map( article => (
