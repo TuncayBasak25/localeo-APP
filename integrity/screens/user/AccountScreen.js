@@ -9,7 +9,7 @@ import { fullScreen, lay, bg, border, text, font,
 } from '../../styles/styles';
 
 import { FullScreen, WrappedButton, WrappedTextInput } from '../../components/Components';
-import { SimpleLineIcons, Octicons, Ionicons, MaterialIcons, Entypo, AntDesign } from '@expo/vector-icons'; 
+import { SimpleLineIcons, Octicons, Ionicons, MaterialCommunityIcons, Entypo, AntDesign, Feather } from '@expo/vector-icons'; 
 import { color } from 'react-native-reanimated';
 
 
@@ -39,31 +39,33 @@ export function AccountScreen({ route, navigation })
         <Text style={[text.size(18), text.secondary, pd.r(10), pd.l(20)]}>Nom complet</Text>
         <View style={[lay.row, lay.relW(100), lay.jc.between]}>
           <Text style={[text.size(15), text.secondary, pd.r(10), pd.l(20), text.white]}>Warren Maunier</Text>
-          <AntDesign style={mg.r(30)} name="edit" size={24} color="grey" />
+          <Feather style={mg.r(30)} name="edit" size={26} color="grey" />
         </View>
 
         <Text style={[text.size(18), text.secondary, mg.t(20), pd.r(10), pd.l(20)]}>Adresse</Text>
         <View style={[lay.row, lay.relW(100), lay.jc.between]}>
           <Text style={[text.size(15), text.secondary, pd.r(10), pd.l(20), text.white]}>2, rue de la Motte, 58000 Nevers</Text>
-          <AntDesign style={mg.r(30)} name="edit" size={24} color="grey" />
+          <Feather style={mg.r(30)} name="edit" size={26} color="grey" />
         </View>
         
         <Text style={[text.size(18), text.secondary, mg.t(20), pd.r(10), pd.l(20)]}>Email</Text>
         <View style={[lay.row, lay.relW(100), lay.jc.between]}>
           <Text style={[text.size(15), text.secondary, pd.r(10), pd.l(20), text.white]}>w.maunier@acs.fr</Text>
-          <AntDesign style={mg.r(30)} name="edit" size={24} color="grey" />
+          <Feather style={mg.r(30)} name="edit" size={26} color="grey" />
         </View>
 
         <Text style={[text.size(18), text.secondary, mg.t(20), pd.r(10), pd.l(20)]}>Mot de passe</Text>
         <View style={[lay.row, lay.relW(100), lay.jc.between]}>
           <Text style={[text.size(15), text.secondary, pd.r(10), pd.l(20), text.white]}>***************</Text>
-          <AntDesign style={mg.r(30)} name="edit" size={24} color="grey" />
+          <Feather style={mg.r(30)} name="edit" size={26} color="grey" />
         </View> 
 
         <Text style={[text.size(18), text.secondary, mg.t(20), pd.r(10), pd.l(20)]}>Photo de profil</Text>
         <View style={[lay.row, lay.relW(100), lay.jc.between]}>
-          <AntDesign style={[text.size(50), text.secondary, pd.r(10), pd.l(20), text.white]} name="user" />
-          <AntDesign style={mg.r(30)} name="edit" size={24} color="grey" />
+          <Image source={require('../../../assets/avatar1.png')}
+            style={[lay.relW(25), lay.ratio(1), border.r(50), mg.l(20)]}
+          />
+          <Feather style={mg.r(30)} name="edit" size={26} color="white" />
         </View>
 
       </View>
@@ -78,12 +80,12 @@ export function AccountScreen({ route, navigation })
 
           <View style={[lay.row, lay.relW(100), lay.jc.between]}>
             <Text style={[text.size(18), text.secondary, pd.r(10), pd.l(20)]}>Notification de messages</Text>
-            <Entypo style={mg.r(30)} name="switch" size={24} color="grey" />
+            <MaterialCommunityIcons style={mg.r(20)} name="toggle-switch-off" size={42} color="orange" />
           </View>
 
           <View style={[lay.row, lay.relW(100), lay.jc.between]}>
             <Text style={[text.size(18), text.secondary, mg.t(20), pd.r(10), pd.l(20)]}>Notification de ventes</Text>
-            <Entypo style={mg.r(30)} name="switch" size={24} color="grey" />
+            <MaterialCommunityIcons style={[mg.r(20), pd.t(15)]} name="toggle-switch" size={42} color="grey" />
           </View>
 
       </View>
