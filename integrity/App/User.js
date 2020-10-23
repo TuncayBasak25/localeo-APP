@@ -1,10 +1,11 @@
-
+import LocationHandler from './LocationHandler';
 import Api from 'localeo-api';
 
-export class User
+export class User extends LocationHandler
 {
   constructor()
   {
+    super();
     this.users = {};
   }
 
@@ -20,7 +21,6 @@ export class User
 
     return { user: this.users["user" + user.id] };
   }
-
 
 }
 

@@ -35,33 +35,21 @@ export function ArticlePostScreen({ route, navigation })
   const [price, setPrice] = useState('');
 
   const [image1, setImage1] = useState(null);
+  const [image2, setImage2] = useState(null);
+  const [image3, setImage3] = useState(null);
 
-  function handleSelectImage(imgNo)
+
+  function handlePostArticle()
+  {
+    App.postArticle(title, description, price)
+    .then( ({error}) => { if (error) setError(error); else console.log("salut") } )
+    .catch( e => console.log(e) );
   }
-    console.log('Enter image library');
-
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [1, 1],
-      quality: 1,
-    });
-
-    console.log(result);
-
-    if (!result.cancelled) {
-      if (imgNo === 1) setImage1(result.uri);
-      else if (imgNo === 2) setImage2(result.uri);
-      else if (imgNo === 3) setImage3(result.uri);
-    }
-  }
-
-
 
   return (
     <FullScreen>
       <View style={[bg.primary, border.br(20)]} >
-        <Text style={[text.size(20), text.center, text.secondary, mg.v(20)]} >Ajouter une annonce</Text>
+        <Text style={[text.size(30), text.center, text.secondary, mg.v(20)]} >Ajouter une annonce</Text>
         <View style={[lay.row, lay.relW(100), lay.jc.around, mg.b(10)]}>
           <TouchableOpacity
             style={[page ? bg.dark : bg.orange, border.r(50)]}
@@ -79,39 +67,80 @@ export function ArticlePostScreen({ route, navigation })
       </View>
 
       { !page ?
-        <View style={[lay.grw(1), lay.jc.between]} >
+        <View style={[lay.grw(1), lay.jc.between, lay.ai.center]} >
           <WrappedTextInput
             style={[inlineFormWrapper, mg.t(40)]} textStyle={[inlineFormText]}
             placeholder="Titre de l'annonce" value={title} onChangeText={setTitle}
           />
-          <WrappedTextInput
+          <View style={[lay.relW(100)]}>
+            <WrappedTextInput
             style={[inlineFormWrapper]} textStyle={[inlineFormText]}
             placeholder="Address" value={address} onChangeText={setAddress}
-          />
+            />
+            <Text style={[text.size(15), lay.relW(100), text.center, text.white]} >OU</Text>
+            <WrappedButton
+              style={[primaryButtonWrapper, mg.b(40)]}
+              textStyle={primaryButtonText}
+              title="Enregistrer la position"
+              onPress={ () => App.getLocation().then( ({error}) => {if (error) setError(error)} ).catch(e => console.log(e)) }
+            />
+            {App.newArticle.lattitde && <Text style={[text.size(30)]} >Location enregistrée</Text> }
+          </View>
           <WrappedTextInput
             style={[inlineFormWrapper]} textStyle={[inlineFormText]}
             placeholder="Prix €" value={price} onChangeText={setPrice}
           />
           <WrappedButton
-            style={[primaryButtonWrapper, mg.b(40)]}
-            textStyle={primaryButtonText}
-            title="-> Continuer"
-            onPress={() => {}}
+          style={[primaryButtonWrapper, mg.b(40), (title && App.newArticle.lattitde && price && image1 && description) ? bg.orange : bg.dark]}
+          textStyle={primaryButtonText}
+          title="-> Continuer"
+          disabled={ (title && App.newArticle.lattitde && price && image1 && description) ? false : true }
+          onPress={handlePostArticle}
           />
         </View>
         :
-        <View style={[lay.grw(1), lay.jc.between, lay.ai.center]} >
-          { image1 ?
-            <Image style={[lay.relW(80), lay.ratio(4/3), mg.v(20), border.r(10)]} source={image1} />
-            :
+        <ScrollView style={[lay.grw(1)]} >
+          <View style={[lay.jc.center, lay.ai.center]} >
             <WrappedButton
-              style={[lay.relW(80), lay.ratio(4/3), mg.v(20), bg.primary, border.r(10)]}
-              onPress={handleSelectImage}
+              style={[lay.relW(80), lay.ratio(4/3), mg.v(20), bg.primary, border.r(30)]}
+              onPress={ () => App.handleChooseImage(1).then( img => setImage1(img) ).catch(e => console.log(e)) }
             >
+            { image1 ?
+              <Image style={[lay.relH(100), lay.ratio(4/3), border.r(25)]} source={image1} />
+              :<>
               <MaterialIcons style={[lay.as.center]} name="add-a-photo" size={80} color={bg.secondary.backgroundColor} />
               <Text style={[text.bold, text.size(20), text.secondary]}>AJOUTER UNE IMAGE</Text>
+              </>
+            }
             </WrappedButton>
-          }
+            { image1 &&
+              <WrappedButton
+                style={[lay.relW(80), lay.ratio(4/3), mg.v(20), bg.primary, border.r(30)]}
+                onPress={ () => App.handleChooseImage(2).then( img => setImage2(img) ).catch(e => console.log(e)) }
+              >
+              { image2 ?
+                <Image style={[lay.relH(100), lay.ratio(4/3), border.r(25)]} source={image2} />
+                :<>
+                <MaterialIcons style={[lay.as.center]} name="add-a-photo" size={80} color={bg.secondary.backgroundColor} />
+                <Text style={[text.bold, text.size(20), text.secondary]}>AJOUTER UNE IMAGE</Text>
+                </>
+              }
+              </WrappedButton>
+            }
+            { image2 &&
+              <WrappedButton
+                style={[lay.relW(80), lay.ratio(4/3), mg.v(20), bg.primary, border.r(30)]}
+                onPress={ () => App.handleChooseImage(3).then( img => setImage3(img) ).catch(e => console.log(e)) }
+              >
+              { image3 ?
+                <Image style={[lay.relH(100), lay.ratio(4/3), border.r(25)]} source={image3} />
+                :<>
+                <MaterialIcons style={[lay.as.center]} name="add-a-photo" size={80} color={bg.secondary.backgroundColor} />
+                <Text style={[text.bold, text.size(20), text.secondary]}>AJOUTER UNE IMAGE</Text>
+                </>
+              }
+              </WrappedButton>
+            }
           <View style={[lay.relW(80), lay.ai.center]}>
             <Text style={[text.size(30), lay.as.start, mg.b(5), text.secondary]} >Description</Text>
             <View style={[lay.relW(100), bg.primary, border.r(20)]} >
@@ -123,12 +152,14 @@ export function ArticlePostScreen({ route, navigation })
             </View>
           </View>
           <WrappedButton
-            style={[primaryButtonWrapper, mg.b(40)]}
+            style={[primaryButtonWrapper, mg.b(40), (title && App.location.lattitde && price && image1 && description) ? bg.orange : bg.dark]}
             textStyle={primaryButtonText}
             title="-> Continuer"
-            onPress={() => {}}
+            disabled={ (title && App.location.lattitde && price && image1 && description) ? false : true }
+            onPress={handlePostArticle}
           />
         </View>
+      </ScrollView>
       }
 
     </FullScreen>
