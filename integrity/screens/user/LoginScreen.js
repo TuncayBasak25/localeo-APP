@@ -56,6 +56,7 @@ export function LoginScreen({ route, navigation })
       </View>
 
       <View>
+      
         <WrappedButton
           style={[primaryButtonWrapper]}
           subStyle={[lay.row, lay.jc.center, lay.ai.center]}
@@ -66,12 +67,18 @@ export function LoginScreen({ route, navigation })
           Se connecter
         </Text>
         </WrappedButton>
+
         <WrappedButton
-          style={[primaryButtonWrapper, bg.primary, lay.w('auto')]}
-          textStyle={[primaryButtonText, text.white]}
-          title="Créez un compte"
+          style={[primaryButtonWrapper]}
+          subStyle={[lay.row, lay.jc.center, lay.ai.center]}
           onPress={ () => navigation.navigate("Register") }
-        />
+        >
+        <AntDesign style={mg.h(30)} name="pluscircleo" size={30} color="black" />
+        <Text style={[lay.grw(1), text.size(20)]}>
+          Créer un compte
+        </Text>
+        </WrappedButton>
+
       </View>
 
     </FullScreen>

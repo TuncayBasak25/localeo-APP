@@ -21,20 +21,28 @@ export function HomeScreen({ route, navigation })
   useEffect(App.nextFrameOnFocus(nextFrame, navigation), []);
   console.log(App.user ? App.user.id : '');
   console.log(App.corresponder ? App.corresponder.id : '');
+  
+  if (!App.user) 
+  App.login("olivier", "benlaura")
+  .then( () => nextFrame(frame => frame+1) )
+  .catch(e => console.log(e));
 
   return (
       <FullScreen><ScrollView>
         { App.logging && <Text>Connexion</Text> }
         { App.user ? <>
           <Text style={[mg.t(20), text.center, text.size(18), text.orange]}>Bonjour {App.user.username} !</Text>
-          <WrappedButton style={inlineFormWrapper} title="Profil" onPress={ () => navigation.navigate("Profile") } />
+          <WrappedButton style={inlineFormWrapper} title="Votre profil" onPress={ () => navigation.navigate("Profile") } />
           </>:
           <Text style={[text.center, text.orange, text.size(14), mg.t(20), mg.b(20)]}>Vous n'êtes pas connecté(e)</Text>
         }
 
         <View>
+        <Text style={[text.center, text.orange, text.size(18), mg.t(20), mg.b(20)]}>
+          Bienvenue sur 
+        </Text>
         <Image
-          style={[inlineFormWrapper, lay.maxW(100)]}
+          style={[lay.maxW(250), lay.relW(80), lay.h(140), lay.as.center, mg.b(80),]}
           source={require('../../assets/splash.png')}
         />
         </View>
