@@ -94,11 +94,11 @@ export function ArticleDetailsScreen({ route, navigation })
               {`Warren Maunier\n`}
               {`58000 Nevers\n`}
               {`Posté il y a 3 minutes\n`}
-              <AntDesign name="staro" size={24} color="yellow" /> 
-              <AntDesign name="staro" size={24} color="yellow" /> 
-              <AntDesign name="staro" size={24} color="yellow" /> 
-              <AntDesign name="staro" size={24} color="yellow" />
-              <AntDesign name="staro" size={24} color="yellow" />
+              <AntDesign name="staro" size={26} color="yellow" /> 
+              <AntDesign name="staro" size={26} color="yellow" /> 
+              <AntDesign name="staro" size={26} color="yellow" /> 
+              <AntDesign name="staro" size={26} color="yellow" />
+              <AntDesign name="staro" size={26} color="yellow" />
             </Text>
             <Text style={[text.size(10), text.white, text.center]}>{`(21 avis client)\n`}</Text>
             <Text style={[text.size(10), text.white, text.center, pd.b(20)]}>Cet utilisateur a déjà vendu 28 articles</Text>
