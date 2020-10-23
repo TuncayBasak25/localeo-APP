@@ -7,7 +7,7 @@ export * from './user/ProfileScreen';
 export * from './user/MessageScreen';
 //
 // import ArticleCategoryScreen from './article/ArticleCategoryScreen';
-// import ArticleDetailsScreen from './article/ArticleDetailsScreen';
+export * from  './article/ArticleDetailsScreen';
 // import ArticleHomeScreen from './article/ArticleHomeScreen';
 // import ArticleSearchScreen from './article/ArticleSearchScreen';
 // import ArticlePostScreen from './article/ArticlePostScreen';

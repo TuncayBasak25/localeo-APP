@@ -9,7 +9,7 @@ import { fullScreen, lay, bg, border, text, font,
 } from '../../styles/styles';
 
 import { FullScreen, WrappedButton, WrappedTextInput } from '../../components/Components';
-import { SimpleLineIcons, Octicons, Ionicons, MaterialIcons, Entypo } from '@expo/vector-icons'; 
+import { SimpleLineIcons, Octicons, Ionicons, MaterialIcons, Entypo, AntDesign } from '@expo/vector-icons'; 
 
 export function ProfileScreen({ route, navigation })
 {
@@ -18,11 +18,15 @@ export function ProfileScreen({ route, navigation })
 
   return (
     <FullScreen>
-    <View style={[lay.relW(100), lay.relH(20), bg.primary, border.blr(30), border.brr(30), lay.jc.center, lay.ai.center]}>
-      <Text style={[text.size(30), text.secondary]}>
-        Paramètre
-      </Text>
-    </View>
+    <View style={[lay.relW(100), lay.relH(12), bg.primary, border.blr(30), border.brr(30), lay.jc.center, lay.ai.center, lay.row, lay.jc.between]}>
+        <WrappedButton
+          subStyle={[lay.jc.center, lay.ai.center]}
+          onPress={ navigation.goBack }>
+          <AntDesign style={[mg.h(30), text.secondary]} name="arrowleft" size={30} />
+        </WrappedButton>
+        <Text style={[text.size(26), text.secondary]}>Vos paramètres</Text>
+        <AntDesign style={mg.r(30)} name="check" size={24} color="green" />
+      </View>
 
     <View style={[lay.jc.between, lay.grw(1)]}>
       

@@ -4,5 +4,6 @@ export const light = "#4E5C6A";
 export const primary = "#4E5C6A";
 export const secondary = "#738A9D";
 export const white = "#A6BCD0";
+export const white2 = "#FFFFFF"
 export const orange = "#E78100";
 export const yellow = "yellow";

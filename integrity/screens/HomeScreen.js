@@ -53,6 +53,7 @@ export function HomeScreen({ route, navigation })
         </>}
         { (App.user && App.corresponder) && <WrappedButton style={inlineFormWrapper} title="Message" onPress={ () => navigation.navigate("Message") } /> }
         <WrappedButton style={inlineFormWrapper} title="Déconnexion" onPress={ () => App.logout().then(() => nextFrame(frame => frame+1) ).catch(e => console.log(e)) } />
+        <WrappedButton style={inlineFormWrapper} title="Detail de l'article" onPress={ () => navigation.navigate("ArticleDetails") } />
 
         { App.user && <WrappedTextInput
           style={inlineFormWrapper}
