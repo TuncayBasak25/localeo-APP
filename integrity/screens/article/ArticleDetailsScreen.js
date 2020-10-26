@@ -80,7 +80,7 @@ export function ArticleDetailsScreen({ route, navigation })
           />
         </View>
 
-        <View style={[lay.relW(100), mg.t(30), lay.row, lay.wrap, lay.jc.center, bg.dark, lay.ai.center, border.tlr(30), border.trr(30), ]}>
+        <View style={[lay.relW(100), mg.t(20), lay.row, lay.wrap, lay.jc.center, bg.dark, lay.ai.center, border.tlr(30), border.trr(30), ]}>
           <Text style={[text.size(18), lay.relW(100), text.orange, text.center, pd.t(10), pd.b(10)]}>Profil du revendeur</Text>
           <View style={[lay.relW(100), lay.ai.center]}>
             <View style={[lay.relW(20), lay.ratio(1)]}>

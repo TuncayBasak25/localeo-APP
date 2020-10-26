@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, ScrollView, Image, View, StatusBar, TouchableOpacity, Keyboard } from 'react-native';
 
-import { fullScreen, lay, bg, border, text, font,
+import { fullScreen, lay, bg, border, text, font, mg, 
   inlineFormWrapper, inlineFormText,
   primaryButtonWrapper, primaryButtonText,
   closeButtonWrapper
@@ -32,10 +32,17 @@ export function RegisterScreen({ route, navigation })
       { !isKeyboardVisible && <Text style={[text.center, text.orange, text.size(40)]}>Créer un compte</Text> }
 
       <View>
+      <Image
+          style={[lay.maxW(200), lay.relW(80), lay.h(140), lay.as.center]}
+          source={require('../../../assets/splash.png')}
+        />
+      </View>
+
+      <View>
         <WrappedTextInput
           style={inlineFormWrapper}
           textStyle={inlineFormText}
-          value={username} placeholder="Entrez votre username"
+          value={username} placeholder="Entrez un pseudo"
           blurOnSubmit={true} autoCompleteType="password"
           onChangeText={setUsername}
           onSubmitEditing={handleRegister}
@@ -43,7 +50,7 @@ export function RegisterScreen({ route, navigation })
         <WrappedTextInput
           style={inlineFormWrapper}
           textStyle={inlineFormText}
-          value={email} placeholder="Enrez votre email"
+          value={email} placeholder="Enrez une adresse email"
           blurOnSubmit={true} autoCompleteType="email"
           onChangeText={setEmail}
           onSubmitEditing={handleRegister}
@@ -59,7 +66,7 @@ export function RegisterScreen({ route, navigation })
         <WrappedTextInput
           style={inlineFormWrapper}
           textStyle={inlineFormText}
-          value={confirmPassword} placeholder="Confirmer votre mot de passe" secureTextEntry={true}
+          value={confirmPassword} placeholder="Confirmation mot de passe" secureTextEntry={true}
           blurOnSubmit={true} autoCompleteType="password"
           onChangeText={setConfirmPassword}
           onSubmitEditing={handleRegister}
@@ -74,11 +81,11 @@ export function RegisterScreen({ route, navigation })
         <WrappedButton
           style={[primaryButtonWrapper]}
           textStyle={primaryButtonText}
-          title="-> CREATION DU COMPTE"
+          title="CREATION DU COMPTE"
           onPress={handleRegister}
         />
         <WrappedButton
-          style={[primaryButtonWrapper, bg.primary, lay.w('auto')]}
+          style={[primaryButtonWrapper, bg.primary]}
           textStyle={[primaryButtonText, text.white]}
           title="CONNEXION"
           onPress={ () => navigation.navigate("Login") }

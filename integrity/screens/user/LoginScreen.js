@@ -3,7 +3,7 @@ import { Text, ScrollView, Image, View, StatusBar, TouchableOpacity, Keyboard } 
 
 import { fullScreen, lay, bg, border, text, font,
   inlineFormWrapper, inlineFormText,
-  primaryButtonWrapper, primaryButtonText,
+  primaryButtonWrapper, primaryButtonText,  
   closeButtonWrapper,
   mg
 } from '../../styles/styles';
@@ -31,6 +31,13 @@ export function LoginScreen({ route, navigation })
   return (
     <FullScreen style={[lay.jc.evenly]}>
       { !isKeyboardVisible && <Text style={[text.center, text.orange, text.size(40)]}>Connexion</Text> }
+
+      <View>
+      <Image
+          style={[lay.maxW(200), lay.relW(80), lay.h(140), lay.as.center]}
+          source={require('../../../assets/splash.png')}
+        />
+      </View>
 
       <View>
         <WrappedTextInput
@@ -64,18 +71,18 @@ export function LoginScreen({ route, navigation })
         >
         <AntDesign style={mg.h(30)} name="login" size={30} color="black" />
         <Text style={[lay.grw(1), text.size(20)]}>
-          Se connecter
+          SE CONNECTER
         </Text>
         </WrappedButton>
 
         <WrappedButton
-          style={[primaryButtonWrapper]}
+          style={[primaryButtonWrapper, bg.primary]} 
           subStyle={[lay.row, lay.jc.center, lay.ai.center]}
           onPress={ () => navigation.navigate("Register") }
         >
-        <AntDesign style={mg.h(30)} name="pluscircleo" size={30} color="black" />
-        <Text style={[lay.grw(1), text.size(20)]}>
-          Créer un compte
+        <AntDesign style={mg.h(30)} name="pluscircleo" size={30} color="#A6BCD0" />
+        <Text style={[lay.grw(1), text.size(20), text.white]}>
+          CREER UN COMPTE
         </Text>
         </WrappedButton>
 

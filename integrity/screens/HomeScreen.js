@@ -22,10 +22,7 @@ export function HomeScreen({ route, navigation })
   console.log(App.user ? App.user.id : '');
   console.log(App.corresponder ? App.corresponder.id : '');
   
-  if (!App.user) 
-  App.login("olivier", "benlaura")
-  .then( () => nextFrame(frame => frame+1) )
-  .catch(e => console.log(e));
+
 
   return (
       <FullScreen><ScrollView>
@@ -52,7 +49,11 @@ export function HomeScreen({ route, navigation })
           <WrappedButton style={inlineFormWrapper} title="Enregistrement" onPress={ () => navigation.navigate("Register") } />
         </>}
         { (App.user && App.corresponder) && <WrappedButton style={inlineFormWrapper} title="Message" onPress={ () => navigation.navigate("Message") } /> }
-        <WrappedButton style={inlineFormWrapper} title="Déconnexion" onPress={ () => App.logout().then(() => nextFrame(frame => frame+1) ).catch(e => console.log(e)) } />
+
+        { App.user && <>
+          <WrappedButton style={inlineFormWrapper} title="Déconnexion" onPress={ () => App.logout().then(() => nextFrame(frame => frame+1) ).catch(e => console.log(e)) } />
+        </>}
+
         <WrappedButton style={inlineFormWrapper} title="Detail de l'article" onPress={ () => navigation.navigate("ArticleDetails") } />
 
         { App.user && <WrappedTextInput
