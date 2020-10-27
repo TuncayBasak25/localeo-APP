@@ -32,8 +32,17 @@ export class Message extends User
     this.isUpdatingMessage = true;
     const lastMessageId = (this.messages.length > 0) ? this.messages[this.messages.length-1].id : 0;
     const { newMessages, error } = await Api.getNewMessages(lastMessageId);
-    if (error) return { error: error };
-    else if (!newMessages) return false;
+
+    if (error)
+    {
+      this.isUpdatingMessage = false;
+      return { error: error };
+    }
+    else if (!newMessages)
+    {
+      this.isUpdatingMessage = false;
+      return false;
+    }
 
     this.messages = this.messages.concat(newMessages);
 

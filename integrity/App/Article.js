@@ -11,27 +11,56 @@ export class Article extends Message
   {
     super();
     this.articles = [];
+    this.articlePage = 1;
+    this.articleMax = 5;
+    this.noMoreArticles = false;
+
+    this.actualArticle = null;
+
     this.images = {};
     this.focus = null;
     this.searching = false;
+
+    this.articleSearchWords = null;
 
     this.newArticle = {};
 
     this.category = 'tout';
     this.sousCategory = 'tout';
+
+    this.categories = [];
   }
 
   async searchArticle(words)
   {
-    if (this.searching) return;
+    if (words || words === '') //New search
+    {
+      this.articles = [];
+      this.articleSearchWords = words;
+      this.articlePage = 1;
+      this.articleMax = 5;
+      this.noMoreArticles = false;
+    }
+    else
+    {
+      this.articlePage++;
+    }
+
+    if (this.searching || this.noMoreArticles) return false;
     this.searching = true;
+
     const articles = await Api.searchArticle({
-      words: words,
+      words: this.articleSearchWords,
       categories: (this.category === 'tout') ? '' : this.category,
       sousCategories: (this.sousCategory === 'tout') ? '' : this.sousCategory,
-    });
+    }, this.articlePage, this.articleMax);
 
-    if (articles === []) return;
+    if (articles.length === 0)
+    {
+      this.noMoreArticles = true;
+      this.searching = false;
+      return true;
+    }
 
     for (let article of articles)
     {
@@ -47,14 +76,25 @@ export class Article extends Message
         }
       }
     }
-    this.articles = articles;
+    const baseLenght = this.articles.length;
+
+    this.articles = this.articles.concat(articles);
+
+    let a = this.articles.map( v => JSON.stringify(v) );
+    a = [...new Set(a)];
+    this.articles = a.map( v => JSON.parse(v) );
+
     this.searching = false;
+
+    if (baseLenght === this.articles.length) return false;
+
+    return true;
   }
 
   getCategories()
   {
     Api.getCategories()
-    .then( categories => this.categories = categories )
+    .then( categories => { if (!categories.error) this.categories = categories} )
     .catch(e => console.log(e));
   }
 
@@ -90,19 +130,20 @@ export class Article extends Message
     image.uri = image.resize.uri;
 
     this.newArticle['image' + imgNo] = await Fs.readAsStringAsync(image.uri, { encoding: Fs.EncodingType.Base64 });
-    console.log(this.newArticle['image' + imgNo]);
+
     return image;
   }
 
-  async postArticle(title, description, price)
+  async postArticle(title, description, price, category)
   {
     const { article, error } = await Api.createArticle({
       title: title,
       description: description,
       price: price,
+      category: category,
 
-      lattitde: this.location.lattitude,
-      longitude: this.location.longitude,
+      latitude: this.newArticle.latitude,
+      longitude: this.newArticle.longitude,
     });
 
     if (error) return { error: error };
@@ -111,24 +152,26 @@ export class Article extends Message
 
     if (this.newArticle.image1)
     {
-      App.createImage( { data: image1, articleId: article.id } )
-      .then( () => {} )
+      Api.createImage( { data: this.newArticle.image1, articleId: article.id } )
+      .then( ({ error, success }) => { if (error) console.log(error + 1); else if (success) console.log("Image uploaded."); } )
       .catch(e => console.log(e));
     }
 
     if (this.newArticle.image2)
     {
-      App.createImage( { data: image2.data, articleId: article.id } )
-      .then( () => {} )
+      Api.createImage( { data: this.newArticle.image2, articleId: article.id } )
+      .then( ({ error, success }) => { if (error) console.log(error + 2); else if (success) console.log("Image uploaded."); } )
       .catch(e => console.log(e));
     }
 
     if (this.newArticle.image3)
     {
-      App.createImage( { data: image1, articleId: article.id } )
-      .then( () => {} )
+      Api.createImage( { data: this.newArticle.image3, articleId: article.id } )
+      .then( ({ error, success }) => { if (error) console.log(error + 3); else if (success) console.log("Image uploaded."); } )
       .catch(e => console.log(e));
     }
+
+    return {};
   }
 
 }

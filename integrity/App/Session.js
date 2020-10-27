@@ -12,11 +12,12 @@ export class Session extends Article
   async login(username, password)
   {
     this.logging = true;
-    const { user, error } = await Api.login(username, password);
+    const { user, sessionToken, error } = await Api.login(username, password);
     this.logging = false;
     if (error) return { error: error };
 
     this.user = user;
+    Api.sessionToken = sessionToken;
     return {};
   }
 
@@ -36,6 +37,8 @@ export class Session extends Article
     this.user = null;
     this.corresponder = null;
     this.messages = [];
+
+    Api.sessionToken = null;
     return {};
   }
 }

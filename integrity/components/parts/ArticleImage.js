@@ -3,18 +3,29 @@ import { View, Image } from 'react-native';
 
 import * as S from '../../styles/styles';
 
-export function ArticleImage(props)
+export class ArticleImage extends React.Component
 {
-  const { App, image } = props;
+  constructor()
+  {
+    super();
+    this.state = {
+      frame: 0
+    }
+  }
 
-  const [frame, nextFrame] = useState(0);
-  if (!App.images[image]) setTimeout(() => nextFrame(frame => frame+1), 500);
+  nextFrame() { this.setState({ frame: this.frame + 1 }) }
 
-  return (
-    <View style={[S.relW(100), S.ratio(1), S.jc.center, S.ai.center, props.style]} >
-      <Image style={[S.lay.relW(100), S.lay.ratio(1), S.border.r(20), props.imageStyle]} source={App.images[image]} />
-    </View>
-  );
+  componentWillUnmount() { clearTimeout(this.update) }
+
+  render()
+  {
+    const { App, image, style } = this.props;
+    if (!App.images[image]) this.update = setTimeout(() => this.nextFrame(), 500);
+
+    return (
+      <Image style={[style]} source={App.images[image]} />
+    );
+  }
 }
 
 export default ArticleImage;

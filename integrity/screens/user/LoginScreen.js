@@ -12,7 +12,7 @@ import { FullScreen, WrappedButton, WrappedTextInput } from '../../components/Co
 
 export function LoginScreen({ route, navigation })
 {
-  const { App } = route.params;console.log(App.categories);
+  const { App } = route.params;
   const [frame, nextFrame] = useState(0);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
 

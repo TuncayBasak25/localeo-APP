@@ -28,7 +28,7 @@ export function MessageScreen({ route, navigation })
 
   useEffect(() => {
     if (App.isUpdatingMessage) return;
-    const messageUpdater = setInterval( () => App.updateMessages().then(res => { if (res && navigation.isFocused()) nextFrame(frame => frame+1) } ).catch(e => console.log(e)) , 100)
+    const messageUpdater = setInterval( () => App.updateMessages().then(res => { if (res && navigation.isFocused()) nextFrame(frame => frame+1) } ).catch(e => console.log(e)) , 1000)
     return () => { clearInterval(messageUpdater) };
    }, []);
 
@@ -53,8 +53,8 @@ export function MessageScreen({ route, navigation })
         </WrappedButton>
       </View>
 
-      <ScrollView style={[lay.grw(1)]}>
-        {App.messages.map( message => ( <Message key={App.uuid()} message={message} myId={App.user.id} cpdId={App.corresponder.id} /> ) )}
+      <ScrollView style={[lay.grw(1), lay.scaleY(-1)]}>
+        { ([...App.messages].reverse()).map( message => ( <Message key={App.uuid()} style={[lay.scaleY(-1)]} message={message} myId={App.user.id} cpdId={App.corresponder.id} /> ) )}
       </ScrollView>
 
       <View style={[lay.relH(15), lay.jc.center, keyboardHeight ? mg.b(keyboardHeight) : null ]}>

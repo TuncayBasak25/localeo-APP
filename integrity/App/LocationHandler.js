@@ -9,13 +9,16 @@ export class LocationHandler
 
   async getLocation()
   {
+    this.loadingLocation = true;
     let { status } = await Location.requestPermissionsAsync();
     if (status !== 'granted') return { error: "Accés refusée" };
 
     this.location = await Location.getCurrentPositionAsync({});
 
-    this.postArticle.lattitde = this.location.lattitde;
-    this.postArticle.longitude = this.location.longitude;
+    this.newArticle.latitude = this.location.coords.latitude;
+    this.newArticle.longitude = this.location.coords.longitude;
+
+    this.loadingLocation = false;
 
     return {};
   }
