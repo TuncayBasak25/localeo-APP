@@ -46,7 +46,7 @@ export class Article extends Message
       this.articlePage++;
     }
 
-    if (this.searching || this.noMoreArticles) return false;
+    if (this.searching || (this.noMoreArticles && (new Date).getTime() - this.noMoreArticles < 1000) ) return false;
     this.searching = true;
 
     const articles = await Api.searchArticle({
@@ -57,7 +57,7 @@ export class Article extends Message
 
     if (articles.length === 0)
     {
-      this.noMoreArticles = true;
+      this.noMoreArticles = (new Date).getTime();
       this.searching = false;
       return true;
     }

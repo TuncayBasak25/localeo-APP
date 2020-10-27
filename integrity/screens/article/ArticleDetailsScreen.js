@@ -34,13 +34,14 @@ export function ArticleDetailsScreen({ route, navigation })
 
       <ScrollView style={[lay.grw(1)]}>
 
-        <View style={[lay.relW(100), lay.ratio(3), bg.primary, border.blr(30), border.brr(30), lay.jc.center, lay.ai.center, lay.row, lay.jc.between]}>
+        <View style={[lay.relW(100), lay.ratio(3), bg.primary, mg.b(20), border.blr(30), border.brr(30), lay.jc.center, lay.ai.center, lay.row, lay.jc.between]}>
           <WrappedButton
+              style={[lay.z(10)]}
               subStyle={[lay.jc.center, lay.ai.center]}
               onPress={ navigation.goBack }>
               <AntDesign style={[mg.h(30), text.secondary]} name="arrowleft" size={30} />
           </WrappedButton>
-          <Text style={[text.size(26), text.secondary, mg.r(120)]}>{article.title}</Text>
+          <Text style={[lay.abs, lay.relW(100), text.center, text.size(26), text.secondary, mg.r(120)]}>{article.title}</Text>
         </View>
 
         <ArticleImage style={[lay.relW(100), lay.ratio(4/3), border.r(20)]} image={"image" + article.id} App={App} />
@@ -54,19 +55,37 @@ export function ArticleDetailsScreen({ route, navigation })
         <View style={[lay.relW(100), mg.t(20), lay.row, lay.wrap, lay.jc.center, bg.dark, lay.ai.center, border.tlr(30), border.trr(30), ]}>
           <Text style={[text.size(18), lay.relW(100), text.orange, text.center, pd.t(10), pd.b(10)]}>Profil du revendeur</Text>
           <View style={[lay.relW(100), lay.ai.center]}>
-            <View style={[lay.relW(20), lay.ratio(1)]}>
+            <WrappedButton
+              style={[lay.relW(25), lay.ratio(1), border.r(50), mg.m(10)]}
+              onPress={ () =>
+                {
+                  if (!App.user)
+                  {
+                    alert("Connectez vous pour envoyer un message!");
+                    return;
+                  }
+                  else if (App.user.id === user.id)
+                  {
+                    navigation.navigate('Account');
+                    return;
+                  }
+                  App.corresponder = user;
+                  navigation.navigate('Message');
+                }
+              }
+            >
               <Image source={ user.Avatar ? {uri: `data:images/jpeg;base64,${user.Avatar.data}`} :require('../../../assets/avatar1.png')}
                 style={[lay.relH(100), lay.ratio(1), border.r(50)]}
               />
-            </View>
+            </WrappedButton>
           </View>
           <View>
             <Text style={[text.size(14), text.secondary, text.center, mg.t(10)]}>
               {`${user.username}\n`}
               {`Posté ${App.getTimeDiff(article.createdAt)}\n`}
             </Text>
-            <View style={[lay.row]} >
-              { (Array(fulllaytars).fill(null)).map( () => (<AntDesign key={App.uuid()} name="star" size={20} color="yellow" />) ) }
+            <View style={[lay.row, lay.jc.center]} >
+              { (Array(fullStars).fill(null)).map( () => (<AntDesign key={App.uuid()} name="star" size={20} color="yellow" />) ) }
               { (rest > 0) && <>
                 <View style={lay.w(20 * rest)}>
                   <AntDesign key={App.uuid()} name="star" size={20} color="yellow" />
@@ -77,7 +96,7 @@ export function ArticleDetailsScreen({ route, navigation })
               </>}
               { (Array(4 - fullStars).fill(null)).map( () => (<AntDesign key={App.uuid()} name="star" size={20} color="gray" />) ) }
             </View>
-            <Text style={[text.size(10), text.white, text.center]}>{`(${avisNumber} avis client)\n`}</Text>
+            <Text style={[text.size(10), mg.t(5), text.white, text.center]}>{`(${avisNumber} avis client)\n`}</Text>
             <Text style={[text.size(10), text.white, text.center, pd.b(20)]}>Cet utilisateur a déjà vendu ${articleNumber} articles</Text>
           </View>
         </View>

@@ -31,6 +31,20 @@ export class App extends Session
       return () => onFocus;
     }
   }
+
+  swipeHandler(state)
+  {
+    if (Math.abs(state.dx) > Math.abs(state.dy))
+    {
+      if (state.dx < 0) return 'right';
+      else return 'left';
+    }
+    else
+    {
+      if (state.dy < 0) return 'up';
+      else return 'down'
+    }
+  }
 }
 
 export default App;

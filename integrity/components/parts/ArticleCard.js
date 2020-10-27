@@ -8,8 +8,8 @@ import { fullScreen, lay, bg, mg, border, text, font,
   closeButtonWrapper
 } from '../../styles/styles';
 
-import { FullScreen, WrappedButton, WrappedTextInput, ArticleImage } from '../../components/Components';
-
+import { WrappedButton, WrappedTextInput } from '../interacts/interacts';
+import { ArticleImage } from './ArticleImage';
 
 import { AntDesign } from '@expo/vector-icons';
 
@@ -60,7 +60,30 @@ export function ArticleCard(props)
         </View>
         { user &&
           <View style={[S.row, S.grw(1), S.jc.between, S.ai.center]} >
-            { user.Avatar && <Image style={[S.relW(25), S.ratio(1), S.border.r(50), S.mg.m(10)]} source={ { uri: `data:images/jpeg;base64,${user.Avatar.data}` } } /> }
+            <WrappedButton
+              style={[S.relW(25), S.ratio(1), S.border.r(50), S.mg.m(10)]}
+              onPress={ () =>
+                {
+                  if (!App.user)
+                  {
+                    alert("Connectez vous pour envoyer un message!");
+                    return;
+                  }
+                  else if (App.user.id === user.id)
+                  {
+                    navigation.navigate('Account');
+                    return;
+                  }
+                  App.corresponder = user;
+                  navigation.navigate('Message');
+                }
+              }
+            >
+              <Image
+                style={[S.relW(100), S.ratio(1), S.border.r(50)]}
+                source={ user.Avatar ? { uri: `data:images/jpeg;base64,${user.Avatar.data}` } : require('../../../assets/avatar1.png') }
+              />
+            </WrappedButton>
             <View style={[S.row, S.grw(1), S.relH(100), S.mg.r(5)]}>
               <View style={[S.jc.center]} >
                 <Text style={[S.text.size(20), S.mg.m(10), S.text.bold, S.text.cyan]} >{user.username.toUpperCase()}</Text>
