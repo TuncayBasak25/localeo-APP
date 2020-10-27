@@ -55,10 +55,10 @@ export function AccountScreen({ route, navigation })
       </View>
 
       <View>
-        <Text style={[text.size(22), text.secondary, mg.l(30), mg.r(30), mg.t(30)]}>Vos informations</Text>
+        <Text style={[text.size(22), text.secondary, mg.l(30), mg.r(30), mg.t(20)]}>Vos informations</Text>
       </View>
 
-      <View style={[lay.relW(85), lay.relH(45), bg.primary, border.blr(15), border.brr(15), border.tlr(15), border.trr(15), mg.t(10), mg.l(30), mg.r(30), lay.jc.center,]}>
+      <View style={[lay.relW(87), bg.primary, border.blr(15), border.brr(15), border.tlr(15), border.trr(15), mg.t(10), mg.l(30), mg.r(30), pd.v(10), lay.jc.center,]}>
 
       { /* Pseudo */ }
         <Text style={[text.size(18), text.secondary, pd.r(10), pd.l(20)]}>Pseudo</Text>
@@ -143,7 +143,7 @@ export function AccountScreen({ route, navigation })
         <View style={[lay.row, lay.relW(100), lay.jc.between]}>
           
           <Image source={ App.user.Avatar ? {uri: `data:images/jpeg;base64,${App.user.Avatar.data}`} : (newAvatar ? {uri: `data:images/jpeg;base64,${newAvatar}`} : require('../../../assets/avatar1.png')) }
-            style={[lay.relW(25), lay.ratio(1), border.r(50), mg.l(20)]}
+            style={[lay.relW(22), lay.ratio(1), border.r(50), mg.l(20)]}
           />
 
           { (typeof newAvatar === 'string') &&
@@ -169,21 +169,21 @@ export function AccountScreen({ route, navigation })
       </View>
 
       <View>
-        <Text style={[text.size(22), text.secondary, mg.l(30), mg.r(30), mg.t(30)]}>
+        <Text style={[text.size(22), text.secondary, mg.l(30), mg.r(30), mg.t(20)]}>
         Vos préférences
         </Text>
       </View>
 
-      <View style={[lay.relW(85), lay.relH(15), bg.primary, border.blr(15), border.brr(15), border.tlr(15), border.trr(15), mg.t(10), mg.l(30), mg.r(30), lay.jc.center,]}>
+      <View style={[lay.relW(85), bg.primary, border.blr(15), border.brr(15), border.tlr(15), border.trr(15), mg.t(10), mg.l(30), mg.r(30), lay.jc.center,]}>
 
-          <View style={[lay.row, lay.relW(100), lay.jc.between]}>
-            <Text style={[text.size(18), text.secondary, pd.r(10), pd.l(20)]}>Notification de messages</Text>
-            <MaterialCommunityIcons style={mg.r(20)} name="toggle-switch-off" size={42} color="orange" />
+          <View style={[lay.row, lay.jc.between]}>
+            <Text style={[text.size(18), text.secondary, pd.r(10), pd.l(20), pd.t(10)]}>Notification de messages</Text>
+            <MaterialCommunityIcons style={[mg.r(20), pd.t(4)]} name="toggle-switch-off" size={42} color="orange" />
           </View>
 
-          <View style={[lay.row, lay.relW(100), lay.jc.between]}>
-            <Text style={[text.size(18), text.secondary, mg.t(20), pd.r(10), pd.l(20)]}>Notification de ventes</Text>
-            <MaterialCommunityIcons style={[mg.r(20), pd.t(15)]} name="toggle-switch" size={42} color="grey" />
+          <View style={[lay.row, lay.jc.between]}>
+            <Text style={[text.size(18), text.secondary,pd.r(10), pd.l(20), pd.t(7)]}>Notification de ventes</Text>
+            <MaterialCommunityIcons style={[mg.r(20), pd.t(1)]} name="toggle-switch" size={42} color="grey" />
           </View>
 
       </View>

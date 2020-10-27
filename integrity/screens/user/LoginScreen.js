@@ -32,12 +32,6 @@ export function LoginScreen({ route, navigation })
     <FullScreen style={[lay.jc.evenly]}>
       { !isKeyboardVisible && <Text style={[text.center, text.orange, text.size(40)]}>Connexion</Text> }
 
-      <View>
-      <Image
-          style={[lay.maxW(200), lay.relW(80), lay.h(140), lay.as.center]}
-          source={require('../../../assets/splash.png')}
-        />
-      </View>
 
       <View>
         <WrappedTextInput
