@@ -21,7 +21,7 @@ export class Article extends Message
     this.focus = null;
     this.searching = false;
 
-    this.articleSearchWords = null;
+    this.articleSearchWords = '';
 
     this.newArticle = {};
 
@@ -31,7 +31,7 @@ export class Article extends Message
     this.categories = [];
   }
 
-  async searchArticle(words)
+  async searchArticle(words, onlyMy)
   {
     if (words || words === '') //New search
     {
@@ -46,13 +46,15 @@ export class Article extends Message
       this.articlePage++;
     }
 
+    if (onlyMy) this.articleSearchWords = this.articleSearchWords + '&userId=' + this.user.id;
+
     if (this.searching || (this.noMoreArticles && (new Date).getTime() - this.noMoreArticles < 1000) ) return false;
     this.searching = true;
 
     const articles = await Api.searchArticle({
       words: this.articleSearchWords,
       categories: (this.category === 'tout') ? '' : this.category,
-      sousCategories: (this.sousCategory === 'tout') ? '' : this.sousCategory,
+      sousCategories: (this.sousCategory === 'tout') ? '' : this.sousCategory
     }, this.articlePage, this.articleMax);
 
     if (articles.length === 0)
@@ -60,7 +62,7 @@ export class Article extends Message
       this.noMoreArticles = (new Date).getTime();
       this.searching = false;
       return true;
-    }
+    }console.log(articles);
 
     for (let article of articles)
     {
@@ -136,6 +138,7 @@ export class Article extends Message
 
   async postArticle(title, description, price, category)
   {
+    this.postingArticle = true;
     const { article, error } = await Api.createArticle({
       title: title,
       description: description,
@@ -146,30 +149,39 @@ export class Article extends Message
       longitude: this.newArticle.longitude,
     });
 
-    if (error) return { error: error };
+    if (error)
+    {
+      this.postingArticle = false;
+      return { error: error };
+    }
 
-    if (!article) return { error: "Unexpected probleme at App, Article, postArticle" };
+    if (!article)
+    {
+      this.postingArticle = false;
+      return { error: "Unexpected probleme at App, Article, postArticle" };
+    }
 
     if (this.newArticle.image1)
     {
-      Api.createImage( { data: this.newArticle.image1, articleId: article.id } )
+      await Api.createImage( { data: this.newArticle.image1, articleId: article.id } )
       .then( ({ error, success }) => { if (error) console.log(error + 1); else if (success) console.log("Image uploaded."); } )
       .catch(e => console.log(e));
     }
 
     if (this.newArticle.image2)
     {
-      Api.createImage( { data: this.newArticle.image2, articleId: article.id } )
+      await Api.createImage( { data: this.newArticle.image2, articleId: article.id } )
       .then( ({ error, success }) => { if (error) console.log(error + 2); else if (success) console.log("Image uploaded."); } )
       .catch(e => console.log(e));
     }
 
     if (this.newArticle.image3)
     {
-      Api.createImage( { data: this.newArticle.image3, articleId: article.id } )
+      await Api.createImage( { data: this.newArticle.image3, articleId: article.id } )
       .then( ({ error, success }) => { if (error) console.log(error + 3); else if (success) console.log("Image uploaded."); } )
       .catch(e => console.log(e));
     }
+    this.postingArticle = false;
 
     return {};
   }

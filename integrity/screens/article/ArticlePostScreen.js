@@ -26,6 +26,7 @@ export function ArticlePostScreen({ route, navigation })
   const [lastMessage, setlastMessage] = useState(null);
   const [image, setImage] = useState({ uri: null });
   const [error, setError] = useState(false);
+  const [upload, setUpload] = useState(false);
 
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
@@ -39,18 +40,19 @@ export function ArticlePostScreen({ route, navigation })
 
   function handlePostArticle()
   {
+    setError(false);
+    App.postingArticle = true;
     App.postArticle(title, description, price, category)
-    .then( ({error}) => { if (error) setError(error); console.log("Article uploaded") } )
+    .then( ({error}) => { if (error) setError(error); else setUpload(true); nextFrame() } )
     .catch( e => console.log(e) );
   }
 
   return (
     <FullScreen>
-      <ScrollView style={[lay.grw(1)]} >
         <View style={[bg.primary, border.br(20)]} >
           <Text style={[text.size(30), text.center, text.secondary, mg.v(20)]} >Ajouter une annonce</Text>
-          <Text>{error}</Text>
         </View>
+          { !upload && <ScrollView style={[lay.grw(1)]} >
           <View style={[lay.grw(1), lay.jc.between, lay.ai.center]} >
             <View style={[lay.relW(100), mg.t(40)]}>
               <WrappedTextInput
@@ -146,11 +148,17 @@ export function ArticlePostScreen({ route, navigation })
             style={[primaryButtonWrapper, mg.b(40), (title && App.newArticle.latitude && price && image1 && description) ? bg.orange : bg.dark]}
             textStyle={primaryButtonText}
             title="-> Continuer"
-            disabled={ (title && App.newArticle.latitude && price && image1 && description) ? false : true }
-            onPress={handlePostArticle}
+            onPress={ (title && App.newArticle.latitude && price && image1 && description) ? handlePostArticle : () => {} }
             />
           </View>
-      </ScrollView>
+      </ScrollView>}
+
+      <View>
+        { error && <Text style={[lay.relW(100), text.center, text.size(20), text.dark]} >{error}</Text> }
+        { (!upload && App.postingArticle) && <Text style={[lay.relW(100), text.center, text.size(20), text.orange]} >Uploading...</Text> }
+        { upload && <Text style={[lay.relW(100), text.center, text.size(40), text.orange]} >Upload complete</Text> }
+      </View>
+
     </FullScreen>
   );
 }

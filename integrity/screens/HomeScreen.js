@@ -24,9 +24,8 @@ export function HomeScreen({ route, navigation })
 
   return (
       <FullScreen><ScrollView>
-        { App.logging && <Text>Connexion</Text> }
         { App.user ? <>
-          <Text style={[mg.t(20), text.center, text.size(18), text.orange]}>Bonjour {App.user.username} !</Text>
+          <Text style={[mg.v(20), text.center, text.size(28), text.orange]}>Bonjour {App.user.username.toUpperCase()} !</Text>
           <WrappedButton style={inlineFormWrapper} title="Votre profil" onPress={ () => navigation.navigate("Profile") } />
           <WrappedButton style={inlineFormWrapper} title="Poster une annonce" onPress={ () => navigation.navigate("ArticlePost") } />
           </>:
@@ -53,15 +52,7 @@ export function HomeScreen({ route, navigation })
           <WrappedButton style={inlineFormWrapper} title="Déconnexion" onPress={ () => App.logout().then(() => nextFrame(frame => frame+1) ).catch(e => console.log(e)) } />
         </>}
 
-        <WrappedButton style={inlineFormWrapper} title="Article search" onPress={ () => navigation.navigate("ArticleSearch") } />
-
-        { App.user && <WrappedTextInput
-          style={inlineFormWrapper}
-          textStyle={inlineFormText}
-          placeholder="Changer d'interlocuteur"
-          onChangeText={setUserId}
-          onSubmitEditing={ () => App.getCorresponder(userId).then( ({ error }) => { if (error) setError(error); nextFrame(frame => frame+1) } ).catch(e => console.log(e)) }
-        /> }
+        <WrappedButton style={[inlineFormWrapper, bg.orange]} title="Recherche" onPress={ () => navigation.navigate("ArticleSearch") } />
 
         { error && <Text style={[text.center, text.secondary, text.size(15), lay.relW(60), lay.as.center]} >{error}</Text>}
 

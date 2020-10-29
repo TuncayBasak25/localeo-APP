@@ -58,7 +58,7 @@ export function ArticleCard(props)
           <Text style={[S.text.center, S.text.white, S.text.size(10), S.text.secondary]} >{App.getTimeDiff(article.createdAt)}</Text>
           <Text style={[S.text.center, S.text.white, S.text.size(10), S.text.secondary]} >{distanceText}</Text>
         </View>
-        { user &&
+        { (user && !props.ignoreUser) &&
           <View style={[S.row, S.grw(1), S.jc.between, S.ai.center]} >
             <WrappedButton
               style={[S.relW(25), S.ratio(1), S.border.r(50), S.mg.m(10)]}

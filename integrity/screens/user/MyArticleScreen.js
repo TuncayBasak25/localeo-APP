@@ -10,7 +10,7 @@ import { fullScreen, lay, bg, mg, border, text, font,
 import { FullScreen, WrappedButton, WrappedTextInput, ArticleImage, ArticleCard } from '../../components/Components';
 
 
-export function ArticleSearchScreen({ route, navigation })
+export function MyArticleScreen({ route, navigation })
 {
   const { App } = route.params;
   const [frame, setFrame] = useState(0);
@@ -26,7 +26,7 @@ export function ArticleSearchScreen({ route, navigation })
   const handleSearch = () => {
     if (!App.searching)
     {
-      App.searchArticle(words)
+      App.searchArticle(words, true)
       .then(res => { if (res) nextFrame() })
       .catch(e => console.log(e));
     }
@@ -41,7 +41,7 @@ export function ArticleSearchScreen({ route, navigation })
 
     if (diff > 0 && !App.searching && !App.noMoreArticles)
     {
-      App.searchArticle()
+      App.searchArticle(null, true)
       .then(res => { if (res) nextFrame() })
       .catch(e => console.log(e));
     }
@@ -54,6 +54,9 @@ export function ArticleSearchScreen({ route, navigation })
   return (
     <FullScreen>
       <View style={[bg.primary, border.br(20)]} >
+        <Text style={[lay.relW(100), text.center, text.size(30), text.secondary, text.bold, mg.t(20)]}>
+        Mes Annonces
+        </Text>
         <WrappedTextInput
           style={[inlineFormWrapper, bg.secondary]}
           textStyle={[inlineFormText]}
@@ -86,7 +89,7 @@ export function ArticleSearchScreen({ route, navigation })
 
       <ScrollView style={[lay.grw(1)]} onScroll={handleScroll} >
         <View style={[lay.row, lay.wrap, lay.jc.center]} >
-          { App.articles.map( article => ( <ArticleCard key={App.uuid()} navigation={navigation} article={article} App={App} /> )) }
+          { App.articles.map( article => ( <ArticleCard ignoreUser={true} key={App.uuid()} navigation={navigation} article={article} App={App} /> )) }
         </View>
         { App.noMoreArticles && <Text style={[lay.relW(100), text.center, text.size(20), text.orange]} >Pas de nouveau résultat</Text> }
         { App.searching && <Text style={[lay.relW(100), text.center, text.size(20), text.orange]} >Chargement en cours...</Text> }
@@ -95,4 +98,4 @@ export function ArticleSearchScreen({ route, navigation })
   );
 }
 
-export default ArticleSearchScreen;
+export default MyArticleScreen;

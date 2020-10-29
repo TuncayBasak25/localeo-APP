@@ -15,7 +15,7 @@ export class User extends LocationHandler
 
   async getUser(userId)
   {
-    if (this.users["user" + userId]) return { user: this.users["user" + user.id] };
+    if (this.users["user" + userId]) return { user: this.users["user" + userId] };
     const { user, error } = await Api.getUser(userId);
 
     if (error) return { error: error };

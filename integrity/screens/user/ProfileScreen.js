@@ -41,7 +41,7 @@ export function ProfileScreen({ route, navigation })
 
           <WrappedButton
             style={superstyle}
-            subStyle={substyle} onPress={ () => {} }
+            subStyle={substyle} onPress={ () => { navigation.navigate('MyArticle') } }
           >
             <Ionicons style={mg.h(20)} name="md-menu" size={24} color={bg.orange.backgroundColor} />
             <Text style={[lay.grw(1), text.secondary, text.size(20)]}>
@@ -53,7 +53,7 @@ export function ProfileScreen({ route, navigation })
           <WrappedButton
             style={superstyle}
             subStyle={substyle}
-            onPress={ () => navigation.navigate("Message") }
+            onPress={ () => navigation.navigate("MyMessage") }
           >
             <MaterialIcons style={mg.h(20)} name="message" size={24} color={bg.orange.backgroundColor} />
             <Text style={[lay.grw(1), text.secondary, text.size(20)]}>

@@ -45,7 +45,7 @@ export function MessageScreen({ route, navigation })
         <WrappedButton style={[lay.relH(80), lay.jc.center, lay.ai.center]} onPress={() => console.log('test')}>
           { App.corresponder.Avatar &&
             <Image
-              source={{ uri: "data:images/jpeg;base64," + App.corresponder.Avatar.data }}
+              source={ App.corresponder.Avatar.data ? { uri: `data:images/jpeg;base64,${App.corresponder.Avatar.data}` } : require('../../../assets/avatar1.png') }
               style={[lay.relH(60), lay.ratio(1), lay.as.center, border.r(100)]}
             />
           }

@@ -53,8 +53,11 @@ export class Session extends Article
     const { error } = await Api.logout();
     if (error) return { error: error };
     this.user = null;
+    this.location = null
     this.corresponder = null;
+    this.corresponderList = null;
     this.messages = [];
+
     Api.sessionToken = null;
 
     await AsyncStorage.removeItem('sessionToken');

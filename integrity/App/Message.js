@@ -8,6 +8,8 @@ export class Message extends User
     super();
     this.corresponder = null;
     this.messages = [];
+
+    this.corresponderList = [];
   }
 
   async getCorresponder(userId)
@@ -49,6 +51,13 @@ export class Message extends User
     let a = this.messages.map( v => JSON.stringify(v) );
     a = [...new Set(a)];
     this.messages = a.map( v => JSON.parse(v) );
+
+    let newCorresponders = newMessages.map( v => {
+      if (v.posterId !== this.user.id) return v.posterId;
+      else return v.destinaterId;
+    });
+    this.corresponderList = this.corresponderList.concat(newCorresponders);
+    this.corresponderList = [...new Set(this.corresponderList)];
 
     this.isUpdatingMessage = false;
     return true;
