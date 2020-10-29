@@ -19,10 +19,8 @@ export function HomeScreen({ route, navigation })
 
   useEffect(App.keyBoardIsVisible(setKeyboardVisible), []);
   useEffect(App.nextFrameOnFocus(nextFrame, navigation), []);
-  console.log(App.user ? App.user.id : '');
-  console.log(App.corresponder ? App.corresponder.id : '');
 
-
+  if (!App.user) App.login().then( ({restore}) => {if (restore) nextFrame(frame => frame+1)} ).catch(e => console.log(e));
 
   return (
       <FullScreen><ScrollView>
@@ -64,7 +62,7 @@ export function HomeScreen({ route, navigation })
           onChangeText={setUserId}
           onSubmitEditing={ () => App.getCorresponder(userId).then( ({ error }) => { if (error) setError(error); nextFrame(frame => frame+1) } ).catch(e => console.log(e)) }
         /> }
-        
+
         { error && <Text style={[text.center, text.secondary, text.size(15), lay.relW(60), lay.as.center]} >{error}</Text>}
 
       </ScrollView></FullScreen>

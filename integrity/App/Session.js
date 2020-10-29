@@ -1,6 +1,8 @@
 import Article from './Article';
 import Api from 'localeo-api';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 export class Session extends Article
 {
   constructor()
@@ -12,12 +14,28 @@ export class Session extends Article
   async login(username, password)
   {
     this.logging = true;
+
+    const lastSessionToken = await AsyncStorage.getItem('sessionToken');
+    if (lastSessionToken)
+    {
+      Api.sessionToken = lastSessionToken;
+      const user = await AsyncStorage.getItem('user');
+      this.user = JSON.parse(user);
+      return { restore: true };
+    }
+
+    if (!username && !password) return {};
+
     const { user, sessionToken, error } = await Api.login(username, password);
     this.logging = false;
     if (error) return { error: error };
 
+    await AsyncStorage.setItem('sessionToken', sessionToken);
+    await AsyncStorage.setItem('user', JSON.stringify(user));
+
     this.user = user;
     Api.sessionToken = sessionToken;
+
     return {};
   }
 
@@ -37,8 +55,11 @@ export class Session extends Article
     this.user = null;
     this.corresponder = null;
     this.messages = [];
-
     Api.sessionToken = null;
+
+    await AsyncStorage.removeItem('sessionToken');
+    await AsyncStorage.removeItem('user');
+
     return {};
   }
 }
